@@ -1,1 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css"; 
+@import './assets/style.css';
+/* @import './assets/style.min.css'; */
+@import './assets/pace.css';
+@import './assets/pace.min.css';

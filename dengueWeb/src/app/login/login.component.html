@@ -1,4 +1,4 @@
-<h1 class="header">Login with Firebase or Social Providers</h1>
+<!-- <h1 class="header">Login or Register</h1>
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
@@ -36,4 +36,124 @@
       <p>No account yet? <a href="/register">Create an account</a></p>
     </div>
   </div>
+</div> -->
+
+<!-- <div class="limiter">
+  <div class="container-login100" style="background-image: url('../../assets/images/bg-01.jpg');">
+    <div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
+      <form class="login100-form validate-form flex-sb flex-w">
+        <span class="login100-form-title p-b-53">
+          Sign In With
+        </span>
+
+        <a (click)="tryFacebookLogin()" class="btn-face m-b-20">
+          <i class="fa fa-facebook-official"></i>
+          Facebook
+        </a>
+
+        <a (click)="tryGoogleLogin()" class="btn-google m-b-20">
+          <img src="../../assets/images/icons/icon-google.png" alt="GOOGLE">
+          Google
+        </a>
+
+        <form [formGroup]="loginForm">
+          <div  class="form-group col-md-12 ">
+            <label class="col-md-6">Email address</label>
+            <input class="col-md-6" type="email" formControlName="email" class="form-control">
+          </div>
+          <div class="form-group col-md-12 ">
+            <label class="col-md-6">Password</label>
+            <input class="col-md-6" type="password" class="form-control" formControlName="password">
+            <label class="error">{{errorMessage}}</label>
+          </div>
+        
+
+
+        <div class="container-login100-form-btn m-t-17">
+          <button  type="submit" (click)="tryLogin(loginForm.value)" class="login100-form-btn">
+            Sign In
+          </button>
+        </div>
+      </form>
+        <div class="w-full text-center p-t-55">
+          <span class="txt2">
+            Not a member?
+          </span>
+
+          <a href="/register" class="txt2 bo1">
+            Sign up now
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> -->
+<div  class="app flex-row align-items-center">
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card-group">
+        <div class="card p-4">
+          <div class="card-body">
+            <h1>Login</h1>
+            <p class="text-muted">Sign In to your account</p>
+            <div class="row">
+              <div class="col-6">
+              <button class="btn btn-block btn-facebook" (click)="tryFacebookLogin()" type="button">
+              <span>facebook</span>
+              </button>
+              </div>
+              <div class="col-6">
+              <button class="btn btn-block btn-twitter" (click)="tryGoogleLogin()" type="button">
+              <span>google</span>
+              </button>
+              </div>
+              </div>
+            <br>
+
+          <form [formGroup]="loginForm">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="icon-user"></i>
+                </span>
+              </div>
+              <input class="form-control" type="text" formControlName="email" placeholder="Email">
+            </div>
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="icon-lock"></i>
+                </span>
+              </div>
+              <input class="form-control" type="password"   formControlName="password" placeholder="Password">
+            </div>
+       
+
+            <div class="row">
+              <div class="col-6">
+                <button class="btn btn-primary px-4"  type="submit" (click)="tryLogin(loginForm.value)" >Login</button>
+              </div>
+              <div class="col-6 text-right">
+                <button class="btn btn-link px-0" type="button">Forgot password?</button>
+              </div>
+            </div>
+          </form>
+          </div>
+        </div>
+        <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+          <div class="card-body text-center">
+            <div>
+              <h2>Sign up</h2>
+              <p>For Prevent Dengue</p>
+              <button class="btn btn-primary active mt-3" routerLink="/register" type="button">Register Now!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+</div>
+
+
