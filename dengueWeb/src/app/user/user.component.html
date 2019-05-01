@@ -37,7 +37,9 @@
 </div> -->
 <div class="row">
   <div class="col-md-12 col-md-offset-12">
-  
+    <app-investigation-sites-list *ngIf="mainUIService.fullContainer == FullPanelComponentEnum.INVESTIGATION"></app-investigation-sites-list>
+    <app-investigation-routes *ngIf="mainUIService.fullContainer == FullPanelComponentEnum.INVESTIGATION_ROUTE"></app-investigation-routes>
+    <manage-users *ngIf="mainUIService.fullContainer == FullPanelComponentEnum.MANAGE_PHIS"></manage-users>
   </div>
 
   </div>

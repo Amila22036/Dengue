@@ -12,7 +12,8 @@ export const environment = {
     projectId: 'dengue-prevent',
     storageBucket: 'dengue-prevent.appspot.com',
     messagingSenderId: '506156341698'
-  }
+  },
+  MAPBOX_API_KEY: 'pk.eyJ1IjoiYW1pbGEyMjAzNiIsImEiOiJjamc2M291b3kycnJsMndxcDhtZXdhaDlnIn0.byD49qq7-UMzR6XI6-gsww'
 
   
 // <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>

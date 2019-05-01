@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../../core/auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-aside-panal',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AsidePanalComponent implements OnInit {
 
-  constructor() { }
+  constructor(  public authService: AuthService,
+                private location : Location
+              ) { }
 
   ngOnInit() {
+  }
+
+  logOut(){
+    this.authService.doLogout()
+    .then((res) => {
+      this.location.back();
+    }, (error) => {
+      console.log("Logout error", error);
+    });
   }
 
 }

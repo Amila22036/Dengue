@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FullPanelComponentEnum } from '../../../shared/enums/mainUI.components.enums';
+import { MainUIService } from '../../../services/main-ui.service';
 
 @Component({
   selector: 'app-aside-panal-left',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AsidePanalLeftComponent implements OnInit {
 
-  constructor() { }
+  constructor(public mainUIService: MainUIService) { }
 
   ngOnInit() {
   }
 
+  addPHI(){
+    this.mainUIService.fullContainer = FullPanelComponentEnum.MANAGE_PHIS;
+  }
 }

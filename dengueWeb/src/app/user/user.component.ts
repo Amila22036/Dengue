@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseUserModel } from '../core/user.model';
+import { MainUIService} from '../services/main-ui.service';
+import { FullPanelComponentEnum } from '../shared/enums/mainUI.components.enums'
 
 @Component({
   selector: 'page-user',
@@ -15,15 +17,17 @@ export class UserComponent implements OnInit{
 
   user: FirebaseUserModel = new FirebaseUserModel();
   profileForm: FormGroup;
+  private FullPanelComponentEnum;
 
   constructor(
     public userService: UserService,
     public authService: AuthService,
     private route: ActivatedRoute,
     private location : Location,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public mainUIService: MainUIService
   ) {
-
+    this.FullPanelComponentEnum = FullPanelComponentEnum
   }
 
   ngOnInit(): void {
