@@ -21,6 +21,7 @@ export class UsersService {
       Email :user.Email,
       PhoneNumber :user.PhoneNumber
     });
+    this.getData();
    }
 
    updateUser(user : User){

@@ -12,6 +12,7 @@ import { ReactiveFormsModule, FormControl, FormsModule  } from '@angular/forms';
 import { AuthGuard } from './core/auth.guard';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
 import { AuthService } from './core/auth.service';
 import { UserService } from './core/user.service';
@@ -21,6 +22,7 @@ import { NavigationComponent } from './user/InnerComponents/navigation/navigatio
 import { AsidePanalComponent } from './user/InnerComponents/aside-panal/aside-panal.component';
 import { ManageUsersComponent } from './user/InnerComponents/phi-map/manage-users/manage-users.component';
 import { PhiComponent } from './user/InnerComponents/phi-map/manage-users/phi/phi.component';
+import { PhisListComponent } from './user/InnerComponents/phi-map/manage-users/phis-list/phis-list.component'
 
 import { NgxAsideModule } from 'ngx-aside';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -41,7 +43,8 @@ import { UsersService } from '../app/user/InnerComponents/phi-map/manage-users/s
     InvestigationSitesListComponent,
     InvestigationRoutesComponent,
     ManageUsersComponent,
-    PhiComponent
+    PhiComponent,
+    PhisListComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +54,7 @@ import { UsersService } from '../app/user/InnerComponents/phi-map/manage-users/s
      FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
     NgbModule.forRoot(),
     NgxAsideModule,
     BrowserAnimationsModule
