@@ -5,14 +5,17 @@ import { UserComponent } from './user/user.component';
 import { RegisterComponent } from './register/register.component';
 import { UserResolver } from './user/user.resolver';
 import { AuthGuard } from './core/auth.guard';
+import { ProjectComponent } from './project/project.component';
 
 
 
 const routes: Routes =[
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
-  { path: 'user', component: UserComponent,  resolve: { data: UserResolver}},
-  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] }
+  { path: 'project', component: ProjectComponent, resolve: {data: UserResolver}},
+  { path: 'user/:id', component: UserComponent,  resolve: { data: UserResolver}},
+  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
+
   // {path:'admin',component:AdminListComponent,canActivate:[AdminGuard]},
   // {path:'article',component:ArticalPageComponent,canActivate:[SubscriberGuard]},
   // {path:'home',component:HomePageComponent},

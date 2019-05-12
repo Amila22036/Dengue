@@ -29,7 +29,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AsidePanalLeftComponent } from './user/InnerComponents/aside-panal-left/aside-panal-left.component';
 import { InvestigationSitesListComponent } from './user/InnerComponents/phi-map/investigation-sites-list/investigation-sites-list.component';
 import { InvestigationRoutesComponent } from './user/InnerComponents/phi-map/investigation-routes/investigation-routes.component';
-import { UsersService } from '../app/user/InnerComponents/phi-map/manage-users/shared/users.service'
+import { UsersService } from '../app/user/InnerComponents/phi-map/manage-users/shared/users.service';
+import { ProjectComponent } from './project/project.component';
+import { ProjectHeadComponent } from './project/project-head/project-head.component';
+import { ManageProjectsComponent } from './project/manage-project/manage-projects.component';
+import { ProjectFormComponent } from './project/manage-project/project-form/project-form.component';
+import { ProjectListComponent } from './project/manage-project/project-list/project-list.component';
+import { ProjectService } from './project/manage-project/shared/project.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +50,12 @@ import { UsersService } from '../app/user/InnerComponents/phi-map/manage-users/s
     InvestigationRoutesComponent,
     ManageUsersComponent,
     PhiComponent,
-    PhisListComponent
+    PhisListComponent,
+    ProjectComponent,
+    ProjectHeadComponent,
+    ManageProjectsComponent,
+    ProjectFormComponent,
+    ProjectListComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +70,7 @@ import { UsersService } from '../app/user/InnerComponents/phi-map/manage-users/s
     NgxAsideModule,
     BrowserAnimationsModule
   ],
-  providers: [AuthService, UserService,UserResolver,AuthGuard,UsersService],
+  providers: [AuthService, UserService,UserResolver,AuthGuard,UsersService,ProjectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

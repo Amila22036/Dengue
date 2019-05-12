@@ -31,6 +31,18 @@ export class UserComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params =>{
+      let id = params['id'];
+      let project = atob(id);
+      let projectObj = '';
+      if(project != undefined)
+      {
+        sessionStorage.setItem('project',project);
+        projectObj = JSON.parse(project);
+      }
+      console.log("project obj ", projectObj)
+
+    })
     this.route.data.subscribe(routeData => {
       let data = routeData['data'];
       if (data) {

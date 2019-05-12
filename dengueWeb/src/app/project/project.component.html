@@ -1,0 +1,51 @@
+
+      <header class="app-header navbar">
+          <button   (click)="NgxAsidePanelLeft.show()" class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+              <span class="navbar-toggler-icon"></span>
+              </button>
+              <!-- <div class="dropdown"> -->
+              <!-- <button  (click)="NgxAsidePanelLeft.show()" class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+                  <span class="navbar-toggler-icon"></span>
+                  </button>
+                
+                </div> -->
+                <div class="create-project">
+              <button class="btn btn-block btn-ghost-secondary active" type="button" (click)="createProject()" aria-pressed="true">Create Project</button>
+                </div>
+             <div class="dropdown left">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown button
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Projects</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </div> 
+       
+        </header>
+
+<!-- <div class="row">
+  <div class="col-md-12">
+
+  </div>
+</div> -->
+
+<br>
+<div *ngIf="mainUIService.projectContainer == ProjectPanelComponentEnum.PROJECT" class="container">
+<div class="row">
+    <div *ngFor="let project of projectList " class="col-md-4">
+      <div class="card">
+          <div class="card-body">{{project.ProjectName}}</div>
+          <div class="card-footer">{{project.ProjectOwner}} 
+            <button class="btn btn-brand btn-linkedin right" type="button" (click)="select(project)" style="margin-bottom: 4px">
+    
+              <span>Select</span>
+              </button></div>
+      </div>
+    </div>
+</div>
+</div>
+<div *ngIf="mainUIService.projectContainer == ProjectPanelComponentEnum.MANAGE_PROJECTS" class="container">
+  <manage-projects></manage-projects>
+</div>

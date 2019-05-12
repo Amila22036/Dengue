@@ -1,0 +1,29 @@
+<h6 class="text-center">Project details</h6>
+<label>Search</label>
+<input type="text" [(ngModel)]="term">
+<table class="table table-sm table-hover">
+ <tr>
+    <th>Project Name</th>
+    <th>Owner Name</th>
+
+  
+  </tr>
+    <tr *ngFor="let project of projectList " (click)="onEdit(project)">
+       
+        <td>{{project.ProjectName}}</td>
+        <td>{{project.ProjectOwner}}</td>
+
+     
+      <td>
+        <a class="btn" (click)="onEdit(project)">
+          <i class="fa fa-pencil-square-o"></i>
+        </a>
+        <a class="btn" (click)="onDelete(project.$key)">
+          <i class="fa fa-trash-o"></i>
+        </a>
+        </td>
+    </tr>
+</table>
+<div class="text-center">
+  <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+  </div>

@@ -1,0 +1,29 @@
+<form #projectForm="ngForm" (ngSubmit)="onSubmit(projectForm)">
+
+        <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="projectService.selectedUser.$key">
+    <div class="form-group">
+    <label> Project Name</label>
+    <input class="form-control" name="ProjectName" #FirstName="ngModel" [(ngModel)]="projectService.selectedUser.ProjectName" placeholder="Project Name" required>
+  </div> 
+  <div class="form-group">
+      <label>Owner Name</label>
+      <input class="form-control" name="ProjectOwner" #LastName="ngModel" [(ngModel)]="projectService.selectedUser.ProjectOwner" placeholder="Project Owner" required>
+    </div> 
+    <!-- <div class="form-group">
+        <label>Email</label>
+        <input class="form-control" name="Email" type="email" ng-model [email]="true" #Email="ngModel" [(ngModel)]="projectService.selectedUser.Email" placeholder="Email" required>
+    </div>
+    <div class="form-group">
+        <label>Phone number</label>
+        <input class="form-control" name="PhoneNumber" #PhoneNumber="ngModel" [(ngModel)]="projectService.selectedUser.PhoneNumber"  pattern="^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$" required>
+    </div>  -->
+    <div class="form-group">
+      <button class="btn btn-default" type="submit" [disabled]="!projectForm.valid">Submit</button>
+      <button class="btn btn-default" type="button" (click)="resetForm(projectForm)">
+        <i class="fa fa-repeat"></i>
+        Reset</button>
+        
+      <button class="btn btn-default" type="button" (click)="backToProjectView()">Back </button>
+    </div>
+
+</form>
