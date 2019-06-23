@@ -1,17 +1,17 @@
-<h6 class="text-center">Project details</h6>
+<h6 class="text-center">Ticket details</h6>
 <label>Search</label>
 <input type="text" [(ngModel)]="term">
 <table class="table table-sm table-hover">
  <tr>
-    <th>Project Name</th>
+    <th>Ticket Name</th>
     <th>Owner Name</th>
 
   
   </tr>
     <tr *ngFor="let project of projectList " (click)="onEdit(project)">
        
-        <td>{{project.ProjectName}}</td>
-        <td>{{project.ProjectOwner}}</td>
+        <td>{{project.ticketName}}</td>
+        <td>{{project.ticketOwner}}</td>
 
      
       <td>

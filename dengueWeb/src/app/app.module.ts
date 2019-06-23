@@ -7,6 +7,7 @@ import { LoginComponent } from '../app/login/login.component';
 import { UserComponent } from './user/user.component';
 import { RegisterComponent } from './register/register.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { MapService } from './services/map/map.service';
 
 import { ReactiveFormsModule, FormControl, FormsModule  } from '@angular/forms';
 import { AuthGuard } from './core/auth.guard';
@@ -35,7 +36,17 @@ import { ProjectHeadComponent } from './project/project-head/project-head.compon
 import { ManageProjectsComponent } from './project/manage-project/manage-projects.component';
 import { ProjectFormComponent } from './project/manage-project/project-form/project-form.component';
 import { ProjectListComponent } from './project/manage-project/project-list/project-list.component';
+import { ManageInvestigationComponent } from './user/InnerComponents/phi-map/manage-investigations/manage_investigation/manage_investigation.component';
+import { ManageInvestigationListComponent } from './user/InnerComponents/phi-map/manage-investigations/manage_investigation-list/manage_investigation-list.component';
 import { ProjectService } from './project/manage-project/shared/project.service';
+import { KanbanComponent } from './user/InnerComponents/kanban/kanban.component';
+import { DndModule } from 'ngx-drag-drop';
+import { ManageInvestigationService } from './user/InnerComponents/phi-map/manage-investigations/shared/manage_investigation.service';
+import { ManageInvestigationsComponent } from './user/InnerComponents/phi-map/manage-investigations/manage-investigations.component';
+import { ManageAreasComponent } from './user/InnerComponents/phi-map/manage-areas/manage-areas.component';
+import { AreasListComponent } from './user/InnerComponents/phi-map/manage-areas/area-list/area-list.component';
+import { AreaComponent } from './user/InnerComponents/phi-map/manage-areas/area/area.component';
+
 
 @NgModule({
   declarations: [
@@ -55,7 +66,14 @@ import { ProjectService } from './project/manage-project/shared/project.service'
     ProjectHeadComponent,
     ManageProjectsComponent,
     ProjectFormComponent,
-    ProjectListComponent
+    ProjectListComponent,
+    KanbanComponent,
+    ManageInvestigationListComponent,
+    ManageInvestigationsComponent,
+    ManageInvestigationComponent,
+    ManageAreasComponent,
+    AreasListComponent,
+    AreaComponent
   ],
   imports: [
     BrowserModule,
@@ -68,9 +86,10 @@ import { ProjectService } from './project/manage-project/shared/project.service'
     AngularFireDatabaseModule,
     NgbModule.forRoot(),
     NgxAsideModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DndModule
   ],
-  providers: [AuthService, UserService,UserResolver,AuthGuard,UsersService,ProjectService],
+  providers: [AuthService,MapService , UserService,UserResolver,AuthGuard,UsersService,ProjectService,ManageInvestigationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

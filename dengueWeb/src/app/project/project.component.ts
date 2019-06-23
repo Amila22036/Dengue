@@ -39,8 +39,8 @@ export class ProjectComponent implements OnInit {
   select(project: Project){
     let projectSession = {
       "project_id": project.$key,
-      "project_name":project.ProjectName,
-      "project_owner":project.ProjectOwner
+      "project_name":project.ticketName,
+      "project_owner":project.ticketOwner
     }
 
     let url =  encodeURIComponent(btoa(JSON.stringify(projectSession)))

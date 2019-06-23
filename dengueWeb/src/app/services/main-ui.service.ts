@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class MainUIService {
 
-  fullContainer: number =0;
+  fullContainer: number =-1;
   projectContainer: number = 0;
 
 

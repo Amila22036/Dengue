@@ -28,7 +28,9 @@
     "firebase": "^5.9.3",
     "jquery": "^3.3.1",
     "leaflet": "^1.4.0",
+    "leaflet-draw": "^1.0.4",
     "ngx-aside": "^1.4.2",
+    "ngx-drag-drop": "^1.1.0",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"

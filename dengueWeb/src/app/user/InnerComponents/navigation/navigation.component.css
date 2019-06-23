@@ -1,0 +1,11 @@
+.right{
+    margin-right: 80%;
+}
+
+.logo{
+    width: 23px;
+}
+.come-top{
+    z-index: 2000 !important;
+}
+

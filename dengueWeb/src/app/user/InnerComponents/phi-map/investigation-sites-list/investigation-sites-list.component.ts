@@ -32,4 +32,8 @@ export class InvestigationSitesListComponent implements OnInit {
     this.mainUIService.fullContainer = FullPanelComponentEnum.INVESTIGATION_ROUTE;
   }
 
+  newInvestigation(){
+    this.mainUIService.fullContainer = FullPanelComponentEnum.NEW_INVESTIGATION;
+  }
+
 }

@@ -13321,7 +13321,7 @@ canvas {
 }
 
 .switch-label .switch-slider::before {
-  z-index: 2;
+  z-index: 2;  
 }
 
 .switch-label .switch-slider::after {

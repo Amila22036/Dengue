@@ -3,13 +3,13 @@
   <span class="navbar-toggler-icon"></span>
   </button>
   <a class="navbar-brand" href="#">
-  <img class="navbar-brand-full" src="img/brand/logo.svg" width="89" height="25" alt="CoreUI Logo">
-  <img class="navbar-brand-minimized" src="img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">
+  <img class="navbar-brand-full logo" src="../../../../assets/images/government-aedes-fight-zika-dengue-011-512.png" width="89" height="25" alt="Prevent Dengue"> Prevent Dengue
+  <img class="navbar-brand-minimized logo" src="../../../../assets/images/government-aedes-fight-zika-dengue-011-512.png" width="30" height="30" alt="Prevent Dengue">
   </a>
-  <button  (click)="NgxAsidePanelLeft.show()" class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+  <button  (click)="NgxAsidePanelLeft.show()" class="navbar-toggler sidebar-toggler d-md-down-none right" type="button" data-toggle="sidebar-lg-show">
   <span class="navbar-toggler-icon"></span>
   </button>
-  <ul class="nav navbar-nav d-md-down-none">
+  <!-- <ul class="nav navbar-nav d-md-down-none">
   <li class="nav-item px-3">
   <a class="nav-link" href="#">Dashboard</a>
   </li>
@@ -19,8 +19,8 @@
   <li class="nav-item px-3">
   <a class="nav-link" href="#">Settings</a>
   </li>
-  </ul>
-  <ul class="nav navbar-nav ml-auto">
+  </ul> -->
+  <!-- <ul class="nav navbar-nav ml-auto">
   <li class="nav-item dropdown d-md-down-none">
   <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
   <i class="icon-bell"></i>
@@ -267,7 +267,7 @@
   <i class="fa fa-lock"></i> Logout</a>
   </div>
   </li>
-  </ul>
+  </ul> -->
   <button (click)="NgxAsidePanelRight.show()" class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" data-toggle="aside-menu-lg-show">
   <span class="navbar-toggler-icon"></span>
   </button>
@@ -288,6 +288,7 @@
            [showOverlay]="false"
     [showDefaultFooter]="false" 
     [showDefaultHeader]="true"
+    class="come-top"
     >
 
     <app-aside-panal></app-aside-panal>
@@ -295,7 +296,7 @@
 </ngx-aside>
 
 <ngx-aside #NgxAsidePanelLeft
-[title]="'Title'"          
+[title]="'Features'"          
 (cancel)="NgxAsidePanelLeft.hide()" 
 (submit)="onSave()" 
 [position]="'left'" 
@@ -303,6 +304,7 @@
 [showOverlay]="false"
 [showDefaultFooter]="false" 
 [showDefaultHeader]="true"
+class="come-top"
 >
 <app-aside-panal-left></app-aside-panal-left>
 </ngx-aside>

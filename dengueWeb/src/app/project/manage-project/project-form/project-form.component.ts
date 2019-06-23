@@ -46,8 +46,12 @@ export class ProjectFormComponent implements OnInit {
     projectForm.reset();
       this.projectService.selectedUser={
         $key:null,
-        ProjectName:'',
-        ProjectOwner: ''
+        ticketName:'',
+        ticketOwner: '',
+        createDate : new Date(),
+        discription: '',
+        latitude: '',
+        longtitude: ''
       }
   }
 

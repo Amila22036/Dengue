@@ -17,16 +17,21 @@ export class ProjectService {
   insertUser(project : Project){
     console.log("project ",project)
     this.projectList.push({
-      ProjectName :project.ProjectName,
-      ProjectOwner :project.ProjectOwner
+      ticketName :project.ticketName,
+      ticketOwner :project.ticketOwner,
+      createDate: project.createDate,
+      discription: project.discription,
+      latitude: project.latitude,
+      longtitude:project.longtitude
+  
     });
     this.getData();
    }
 
    updateUser(project : Project){
      this.projectList.update(project.$key,{
-      ProjectName :project.ProjectName,
-      ProjectOwner :project.ProjectOwner
+      ticketName :project.ticketName,
+      ticketOwner :project.ticketOwner
      });
    }
 

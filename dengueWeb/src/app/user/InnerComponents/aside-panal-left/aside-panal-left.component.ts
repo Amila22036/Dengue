@@ -17,4 +17,16 @@ export class AsidePanalLeftComponent implements OnInit {
   addPHI(){
     this.mainUIService.fullContainer = FullPanelComponentEnum.MANAGE_PHIS;
   }
+
+  manageInvestigations(){
+    this.mainUIService.fullContainer = FullPanelComponentEnum.INVESTIGATION;
+  }
+
+  investigationBoad(){
+    this.mainUIService.fullContainer = FullPanelComponentEnum.INVESTIGATION_BOARD;
+  }
+
+  manageAreas(){
+    this.mainUIService.fullContainer = FullPanelComponentEnum.AREAS;
+  }
 }

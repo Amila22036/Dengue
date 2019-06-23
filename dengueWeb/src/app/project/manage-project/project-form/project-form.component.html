@@ -2,13 +2,31 @@
 
         <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="projectService.selectedUser.$key">
     <div class="form-group">
-    <label> Project Name</label>
-    <input class="form-control" name="ProjectName" #FirstName="ngModel" [(ngModel)]="projectService.selectedUser.ProjectName" placeholder="Project Name" required>
+    <label> Ticket Name</label>
+    <input class="form-control" name="ticketName" #FirstName="ngModel" [(ngModel)]="projectService.selectedUser.ticketName" placeholder="Project Name" required>
   </div> 
   <div class="form-group">
       <label>Owner Name</label>
-      <input class="form-control" name="ProjectOwner" #LastName="ngModel" [(ngModel)]="projectService.selectedUser.ProjectOwner" placeholder="Project Owner" required>
+      <input class="form-control" name="ticketOwner" #LastName="ngModel" [(ngModel)]="projectService.selectedUser.ticketOwner" placeholder="Project Owner" required>
     </div> 
+    <div class="form-group">
+      <label>Create Date</label>
+      <input class="form-control" name="createDate" [(ngModel)]="projectService.selectedUser.createDate" placeholder="Create Date" required>
+    </div> 
+    <div class="form-group">
+      <label>Discription</label>
+      <input class="form-control" name="discription"  [(ngModel)]="projectService.selectedUser.discription" placeholder="Discription" required>
+    </div> 
+    <div class="form-group">
+      <label>Destination Latitude</label>
+      <input class="form-control" name="latitude"  [(ngModel)]="projectService.selectedUser.latitude" placeholder="Latitude" required>
+    </div> 
+    <div class="form-group">
+      <label>Destination Longtitude</label>
+      <input class="form-control" name="longtitude"  [(ngModel)]="projectService.selectedUser.longtitude" placeholder="Longtitude" required>
+    </div> 
+
+
     <!-- <div class="form-group">
         <label>Email</label>
         <input class="form-control" name="Email" type="email" ng-model [email]="true" #Email="ngModel" [(ngModel)]="projectService.selectedUser.Email" placeholder="Email" required>
