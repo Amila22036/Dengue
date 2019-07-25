@@ -9,18 +9,18 @@
     <th>Phone Number</th>
   
   </tr>
-    <tr *ngFor="let User of userList " (click)="onEdit(User)">
+    <tr *ngFor="let phi of phiList " (click)="onEdit(phi)">
        
-        <td>{{User.FirstName}}</td>
-        <td>{{User.LastName}}</td>
-      <td>{{User.Email}}</td>
-      <td>{{User.PhoneNumber}}</td>
+        <td>{{phi.FirstName}}</td>
+        <td>{{phi.LastName}}</td>
+      <td>{{phi.Email}}</td>
+      <td>{{phi.PhoneNumber}}</td>
      
       <td>
-        <a class="btn" (click)="onEdit(User)">
+        <a class="btn" (click)="onEdit(phi)">
           <i class="fa fa-pencil-square-o"></i>
         </a>
-        <a class="btn" (click)="onDelete(User.$key)">
+        <a class="btn" (click)="onDelete(phi.$key)">
           <i class="fa fa-trash-o"></i>
         </a>
         </td>

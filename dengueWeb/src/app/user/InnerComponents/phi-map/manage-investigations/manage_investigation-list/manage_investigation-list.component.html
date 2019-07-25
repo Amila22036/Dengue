@@ -3,18 +3,18 @@
 <input type="text" [(ngModel)]="term">
 <table class="table table-sm table-hover">
  <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Email</th>
+    <th>Investigation Name</th>
+    <th>Start Date</th>
+    <th>Assigned PHI</th>
     <th>Phone Number</th>
   
   </tr>
-    <tr *ngFor="let User of userList " (click)="onEdit(User)">
+    <tr *ngFor="let investigation of investigationList " (click)="onEdit(User)">
        
-        <td>{{User.FirstName}}</td>
-        <td>{{User.LastName}}</td>
-      <td>{{User.Email}}</td>
-      <td>{{User.PhoneNumber}}</td>
+        <td>{{investigation.name}}</td>
+        <td>{{investigation.start_date.day}}/{{investigation.start_date.month}}/{{investigation.start_date.year}}</td>
+      <td>{{investigation.assigned_PHI}}</td>
+      <td>{{investigation.status}}</td>
      
       <td>
         <a class="btn" (click)="onEdit(User)">

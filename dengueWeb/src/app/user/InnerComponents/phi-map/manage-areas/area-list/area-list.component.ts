@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AreasService } from '../shared/areas.service';
-import {User} from '../shared/area.model';
+import {Area} from '../shared/area.model';
 import { element } from 'protractor';
 // import {ToastrService} from 'ngx-toastr';
 
@@ -13,7 +13,7 @@ import { element } from 'protractor';
 })
 export class AreasListComponent implements OnInit {
   
-userList : User[];
+areaList : Area[];
 p: number = 1;
 term='';
   constructor(public areasService: AreasService ) { }
@@ -21,18 +21,18 @@ term='';
   ngOnInit() {
     var x= this.areasService.getData();
     x.snapshotChanges().subscribe(item =>{
-      this.userList=[];
+      this.areaList=[];
       item.forEach(element =>{
         var y=element.payload.toJSON();
         y["$key"] =element.key;
-        this.userList.push(y as User);
+        this.areaList.push(y as Area);
       })
     })
   }
 
-  onEdit(user: User){
-    this.areasService.selectedUser= Object.assign({},user);
-      console.log(user);
+  onEdit(area: Area){
+    this.areasService.selectedArea= Object.assign({},area);
+      console.log(area);
   }
 
   onDelete(key : string){

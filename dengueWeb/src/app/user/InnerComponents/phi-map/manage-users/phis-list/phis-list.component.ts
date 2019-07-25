@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UsersService} from '../shared/users.service';
-import {User} from '../shared/user.model';
+import { Phi } from '../shared/user.model';
 import { element } from 'protractor';
 // import {ToastrService} from 'ngx-toastr';
 
@@ -13,7 +13,7 @@ import { element } from 'protractor';
 })
 export class PhisListComponent implements OnInit {
   
-userList : User[];
+phiList : Phi[];
 p: number = 1;
 term='';
   constructor(public userService: UsersService) { }
@@ -21,18 +21,18 @@ term='';
   ngOnInit() {
     var x= this.userService.getData();
     x.snapshotChanges().subscribe(item =>{
-      this.userList=[];
+      this.phiList=[];
       item.forEach(element =>{
         var y=element.payload.toJSON();
         y["$key"] =element.key;
-        this.userList.push(y as User);
+        this.phiList.push(y as  Phi);
       })
     })
   }
 
-  onEdit(user: User){
-    this.userService.selectedUser= Object.assign({},user);
-      console.log(user);
+  onEdit(phi: Phi){
+    this.userService.selectedUser= Object.assign({},phi);
+      console.log(phi);
   }
 
   onDelete(key : string){

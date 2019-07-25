@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ManageInvestigationService } from '../shared/manage_investigation.service';
-import {User} from '../shared/manage_investigation.model';
+import { Investigation } from '../shared/manage_investigation.model';
 import { element } from 'protractor';
 // import {ToastrService} from 'ngx-toastr';
 
@@ -13,7 +13,7 @@ import { element } from 'protractor';
 })
 export class ManageInvestigationListComponent implements OnInit {
   
-userList : User[];
+investigationList : Investigation[];
 p: number = 1;
 term='';
   constructor(public manageInvestigationService: ManageInvestigationService) { }
@@ -21,16 +21,16 @@ term='';
   ngOnInit() {
     var x= this.manageInvestigationService.getData();
     x.snapshotChanges().subscribe(item =>{
-      this.userList=[];
+      this.investigationList=[];
       item.forEach(element =>{
         var y=element.payload.toJSON();
         y["$key"] =element.key;
-        this.userList.push(y as User);
+        this.investigationList.push(y as Investigation);
       })
     })
   }
 
-  onEdit(user: User){
+  onEdit(user: Investigation){
     this.manageInvestigationService.selectedUser= Object.assign({},user);
       console.log(user);
   }

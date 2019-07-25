@@ -5,7 +5,8 @@ export enum FullPanelComponentEnum{
     MANAGE_PHIS = 2,
     INVESTIGATION_BOARD = 3,
     NEW_INVESTIGATION = 4,
-    AREAS = 5
+    AREAS = 5,
+    RISK_MAP =6
 }
 
 export enum ProjectPanelComponentEnum{

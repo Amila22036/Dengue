@@ -1,9 +1,8 @@
 import { EmailValidator } from "@angular/forms";
 
-export class User {
+export class Area {
     $key:string;
-    FirstName :string;
-    LastName:string;
-    Email : string;
-    PhoneNumber: number;
+    AreaName :string;
+    AreaCode:string;
+    GpxName: string;
 }

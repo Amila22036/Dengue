@@ -1,6 +1,6 @@
 import { EmailValidator } from "@angular/forms";
 
-export class User {
+export class Phi {
     $key:string;
     FirstName :string;
     LastName:string;

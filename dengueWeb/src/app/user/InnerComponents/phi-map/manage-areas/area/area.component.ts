@@ -16,14 +16,23 @@ export class AreaComponent implements OnInit {
   ngOnInit() {
     this.areasService.getData();
     this.resetForm();
-    
+    this.areasService.isgpxUploaded = false;
   }
 
-  ngAfterViewInit(){
-    this.mapService.drawRoute();
+  ngAfterViewInit(){ 
   }
 
-
+  Map(){
+    // this.isMapShow = !this.isMapShow;
+    this.mapService.isMapShowOnArea = !this.mapService.isMapShowOnArea;
+    if(this.mapService.isMapShowOnArea == true)
+    {
+      setTimeout(() => {
+        this.mapService.drawRoute();
+      }, 1000);
+     
+    }
+  }
 
   onSubmit(userForm:NgForm){
     if(userForm.value.$key == null)
@@ -40,15 +49,14 @@ export class AreaComponent implements OnInit {
       
   }
 
-  resetForm(userForm?:NgForm){
-    if(userForm != null)
-      userForm.reset();
-      this.areasService.selectedUser={
+  resetForm(areaForm?:NgForm){
+    if(areaForm != null)
+      areaForm.reset();
+      this.areasService.selectedArea={
         $key:null,
-        FirstName:'',
-        LastName:'',
-        Email:'',
-        PhoneNumber:0
+        AreaName:'',                                  
+        AreaCode:'',
+        GpxName:''
       }
   }
 

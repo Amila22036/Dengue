@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx creator="Patrick Hooper" version="1.1" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd">
+  <metadata>
+    <name>Activity</name>
+  </metadata>
+  <trk>
+    <name>Everyday I'm hustlin'</name>
+    <trkseg>
+      <trkpt lat="6.882800241767556" lon="80.07659912109375"></trkpt>
+      <trkpt lat="7.1608500964972555" lon="80.20294189453125"></trkpt>
+      <trkpt lat="7.465964348046485" lon="80.47210693359376"></trkpt>
+      <trkpt lat="6.9973114635733005" lon="80.64239501953126"></trkpt>
+      <trkpt lat="6.522730037335419" lon="80.44464111328126"></trkpt>
+      <trkpt lat="6.375353167891235" lon="80.15899658203126"></trkpt>
+      <trkpt lat="6.702798381193026" lon="80.08758544921876"></trkpt>
+    </trkseg>
+  </trk>
+</gpx>

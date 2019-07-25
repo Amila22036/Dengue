@@ -3,7 +3,10 @@ import { ManageInvestigationService } from '../shared/manage_investigation.servi
 import {NgForm,FormBuilder,FormGroup,Validators} from '@angular/forms';
 import { FullPanelComponentEnum } from '../../../../../shared/enums/mainUI.components.enums';
 import { MainUIService } from '../../../../../services/main-ui.service';
-
+import { AreasService } from '../../manage-areas/shared/areas.service';
+import { UsersService } from '../../manage-users/shared/users.service';
+import { Area} from '../../manage-areas/shared/area.model';
+import { Phi } from '../../manage-users/shared/user.model';
 
 @Component({
   selector: 'manage_investigation',
@@ -12,13 +15,35 @@ import { MainUIService } from '../../../../../services/main-ui.service';
  
 })
 export class ManageInvestigationComponent implements OnInit {
+  areaList = [];
+  phiList=[]
+  constructor(public manageInvestigationService : ManageInvestigationService,
+    public mainUIService:MainUIService, public areasService:AreasService, public userService:UsersService ) { 
+      this.manageInvestigationService.getData();
 
-  constructor(public manageInvestigationService : ManageInvestigationService,public mainUIService:MainUIService) { }
 
+    }
   ngOnInit() {
-    this.manageInvestigationService.getData();
+    var x= this.areasService.getData();
+    x.snapshotChanges().subscribe(item =>{
+      this.areaList=[];
+      item.forEach(element =>{
+        var y=element.payload.toJSON();
+        y["$key"] =element.key;
+        this.areaList.push(y as Area);
+      })
+    })
     this.resetForm();
-    
+
+    var phi= this.userService.getData();
+    phi.snapshotChanges().subscribe(item =>{
+      this.phiList=[];
+      item.forEach(element =>{
+        var phiy=element.payload.toJSON();
+        phiy["$key"] =element.key;
+        this.phiList.push(phiy as  Phi);
+      })
+    })  
   }
 
   onSubmit(userForm:NgForm ){
@@ -42,16 +67,13 @@ export class ManageInvestigationComponent implements OnInit {
       this.manageInvestigationService.selectedUser={
         $key:null,
         area:'',
-        complainer:'',
-        assigner:'',
-        route:'',
+        name:'',
         assigned_date:'',
         assigned_PHI: '',
         start_date: '',
         end_date: '',
-        expected_day_to_start_date: '',
-        description:'',
-        feedback: ''
+        status: '',
+        description:''
       }
   }
 

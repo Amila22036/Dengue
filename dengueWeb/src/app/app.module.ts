@@ -46,6 +46,11 @@ import { ManageInvestigationsComponent } from './user/InnerComponents/phi-map/ma
 import { ManageAreasComponent } from './user/InnerComponents/phi-map/manage-areas/manage-areas.component';
 import { AreasListComponent } from './user/InnerComponents/phi-map/manage-areas/area-list/area-list.component';
 import { AreaComponent } from './user/InnerComponents/phi-map/manage-areas/area/area.component';
+import { RiskMapComponent } from './user/InnerComponents/risk-map/risk-map/risk-map.component';
+import { AngularFirestoreModule , AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
+import { NgDatepickerModule } from 'ng2-datepicker';
+import { AreasService } from './user/InnerComponents/phi-map/manage-areas/shared/areas.service'
 
 
 @NgModule({
@@ -73,7 +78,8 @@ import { AreaComponent } from './user/InnerComponents/phi-map/manage-areas/area/
     ManageInvestigationComponent,
     ManageAreasComponent,
     AreasListComponent,
-    AreaComponent
+    AreaComponent,
+    RiskMapComponent
   ],
   imports: [
     BrowserModule,
@@ -87,9 +93,12 @@ import { AreaComponent } from './user/InnerComponents/phi-map/manage-areas/area/
     NgbModule.forRoot(),
     NgxAsideModule,
     BrowserAnimationsModule,
-    DndModule
+    DndModule,
+    AngularFirestoreModule,
+    NgDatepickerModule 
   ],
-  providers: [AuthService,MapService , UserService,UserResolver,AuthGuard,UsersService,ProjectService,ManageInvestigationService],
+  providers: [AuthService,MapService , UserService,UserResolver,AuthGuard,UsersService,ProjectService,
+    ManageInvestigationService, AngularFirestore , AngularFireStorage, AreasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

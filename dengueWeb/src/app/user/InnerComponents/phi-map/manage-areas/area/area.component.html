@@ -1,15 +1,16 @@
-<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+<div class="card-body">
+<form #areaForm="ngForm" (ngSubmit)="onSubmit(areaForm)">
 
-        <!-- <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="userService.selectedUser.$key"> -->
-    <!-- <div class="form-group">
-    <label> First Name</label>
-    <input class="form-control" name="FirstName" #FirstName="ngModel" [(ngModel)]="userService.selectedUser.FirstName" placeholder="First Name" required>
+        <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="areasService.selectedArea.$key">
+    <div class="form-group">
+    <label> Area Name</label>
+    <input class="form-control" name="AreaName" #FirstName="ngModel" [(ngModel)]="areasService.selectedArea.AreaName" placeholder="Area Name" required>
   </div> 
   <div class="form-group">
-      <label>Last Name</label>
-      <input class="form-control" name="LastName" #LastName="ngModel" [(ngModel)]="userService.selectedUser.LastName" placeholder="Last Name" required>
+      <label>Area Code</label>
+      <input class="form-control" name="AreaCode" #LastName="ngModel" [(ngModel)]="areasService.selectedArea.AreaCode" placeholder="Area Code" required>
     </div> 
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label>Email</label>
         <input class="form-control" name="Email" type="email" ng-model [email]="true" #Email="ngModel" [(ngModel)]="userService.selectedUser.Email" placeholder="Email" required>
     </div>
@@ -17,13 +18,17 @@
         <label>Phone number</label>
         <input class="form-control" name="PhoneNumber" #PhoneNumber="ngModel" [(ngModel)]="userService.selectedUser.PhoneNumber"  pattern="^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$" required>
     </div>  -->
-
-    <div id="map"></div>
-    <!-- <div class="form-group">
-      <button class="btn btn-default" type="submit" [disabled]="!userForm.valid">Submit</button>
-      <button class="btn btn-default" type="button" (click)="resetForm(userForm)">
+    <button class="btn btn-default" type="button" (click)="Map()"><ng-container *ngIf="mapService.isMapShowOnArea == false">Show map</ng-container><ng-container *ngIf="mapService.isMapShowOnArea == true">Hide map</ng-container></button>
+   <ng-container *ngIf="mapService.isMapShowOnArea == true">
+    <div  id="map"></div>
+    <a href="#" download="MyTracks.gpx" id="exportGPX">Export to file</a>
+   </ng-container>
+    <div class="form-group">
+      <button class="btn btn-default" type="submit" [disabled]="!areaForm.valid">Submit</button>
+      <button class="btn btn-default" type="button" (click)="resetForm(areaForm)">
         <i class="fa fa-repeat"></i>
         Reset</button>
-    </div> -->
+    </div>
 
 </form>
+</div>

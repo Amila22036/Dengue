@@ -22,7 +22,7 @@ export const SAVED_ACTIVITIES: IinvestigationSitesModel[] = [{
     "endDate": "04/23/2019",
     "comments": "Good",
     "distance" : 3.6,
-    "gpxData": "../../assets/gpx/3457487.gpx",
+    "gpxData": "../../assets/gpx/Gpx_Map (3).gpx",
     "assignedBy": "master",
     "role": "PHI"
 

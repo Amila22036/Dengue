@@ -26,6 +26,10 @@ export class AsidePanalLeftComponent implements OnInit {
     this.mainUIService.fullContainer = FullPanelComponentEnum.INVESTIGATION_BOARD;
   }
 
+  dengueRiskMap(){
+    this.mainUIService.fullContainer = FullPanelComponentEnum.RISK_MAP;
+  }
+
   manageAreas(){
     this.mainUIService.fullContainer = FullPanelComponentEnum.AREAS;
   }

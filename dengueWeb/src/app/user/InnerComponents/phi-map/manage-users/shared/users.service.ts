@@ -1,40 +1,40 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFireDatabase,AngularFireList} from 'angularfire2/database';
-import { User} from './user.model';
+import { Phi} from './user.model';
 
 @Injectable()
 export class UsersService {
-  userList: AngularFireList<any>;
-  selectedUser: User = new User();
+  phiList: AngularFireList<any>;
+  selectedUser: Phi = new Phi();
   constructor(private firebase:AngularFireDatabase) { }
 
   getData(){
-    this.userList = this.firebase.list('user');
-    return this.userList;
+    this.phiList = this.firebase.list('phi');
+    return this.phiList;
   }
 
-  insertUser(user : User){
-    this.userList.push({
-      FirstName :user.FirstName,
-      LastName :user.LastName,
-      Email :user.Email,
-      PhoneNumber :user.PhoneNumber
+  insertUser(phi : Phi){
+    this.phiList.push({
+      FirstName :phi .FirstName,
+      LastName :phi .LastName,
+      Email :phi .Email,
+      PhoneNumber :phi .PhoneNumber
     });
     this.getData();
    }
 
-   updateUser(user : User){
-     this.userList.update(user.$key,{
-       FirstName : user.FirstName,
-       LastName : user.LastName,
-       Email : user.Email,
-       PhoneNumber : user.PhoneNumber
+   updateUser(phi : Phi){
+     this.phiList.update(phi.$key,{
+       FirstName : phi.FirstName,
+       LastName : phi.LastName,
+       Email : phi.Email,
+       PhoneNumber : phi.PhoneNumber
      });
    }
 
    deleteUser($key:string){
-     this.userList.remove($key);
+     this.phiList.remove($key);
    }
 
 

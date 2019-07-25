@@ -1,54 +1,47 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFireDatabase,AngularFireList} from 'angularfire2/database';
-import { User} from './manage_investigation.model';
+import { Investigation} from './manage_investigation.model';
 
 @Injectable()
 export class ManageInvestigationService {
-  userList: AngularFireList<any>;
-  selectedUser: User = new User();
+  investigationList: AngularFireList<any>;
+  selectedUser: Investigation = new Investigation();
   constructor(private firebase:AngularFireDatabase) { }
 
   getData(){
-    this.userList = this.firebase.list('user');
-    return this.userList;
+    this.investigationList = this.firebase.list('Investigation');
+    return this.investigationList;
   }
 
-  insertUser(user : User){
-    this.userList.push({
-      area :user.area,
-      complainer :user.complainer,
-      assigner :user.assigner,
-      route :user.route,
-      assigned_date:user.assigned_date,
-      assigned_PHI: user.assigned_PHI,
-      start_date: user.start_date,
-      end_date: user.end_date,
-      expected_day_to_start_date: user.expected_day_to_start_date,
-      description: user.description,
-      feedback: user.feedback
+  insertUser(investigation : Investigation){
+    this.investigationList.push({
+      area :investigation.area,
+      name : investigation.name,
+      assigned_date: new Date(),
+      assigned_PHI: investigation.assigned_PHI,
+      start_date: investigation.start_date,
+      end_date: investigation.end_date,
+      status: investigation.status,
+      description: investigation.description,
     })
     this.getData();
    }
 
-   updateUser(user : User){
-     this.userList.update(user.$key,{
-      area : user.area,
-       complainer : user.complainer,
-       assigner : user.assigner,
-       route : user.route,
-       assigned_date:user.assigned_date,
-       assigned_PHI: user.assigned_PHI,
-       start_date: user.start_date,
-       end_date: user.end_date,
-       expected_day_to_start_date: user.expected_day_to_start_date,
-       description:user.description,
-       feedback: user.feedback
+   updateUser(investigation : Investigation){
+     this.investigationList.update(investigation.$key,{
+      area : investigation.area,
+      name : investigation.name,
+       assigned_PHI: investigation.assigned_PHI,
+       start_date: investigation.start_date,
+       end_date: investigation.end_date,
+       status: investigation.status,
+       description: investigation.description,
      });
    }
 
    deleteUser($key:string){
-     this.userList.remove($key);
+     this.investigationList.remove($key);
    }
 
 
