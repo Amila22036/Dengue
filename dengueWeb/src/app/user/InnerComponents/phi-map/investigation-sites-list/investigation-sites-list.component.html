@@ -5,20 +5,20 @@
   <table class="table table-responsive-sm table-bordered table-striped table-sm">
   <thead>
   <tr >
-  <th>Username</th>
-  <th>Date registered</th>
-  <th>Role</th>
+  <th>name</th>
+  <th>Assigned PHI</th>
+  <th>Discription</th>
   <th>Status</th>
   <th><button _ngcontent-c13="" aria-pressed="true" (click)="newInvestigation()" class="btn btn-block btn-ghost-secondary active" type="button">New Investigation</button></th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let site of investigations">
-  <td>{{site.phiName}}</td>
-  <td>2012/01/01</td>
-  <td>Member</td>
+  <tr *ngFor="let site of investigationList">
+  <td>{{site.name}}</td>
+  <td>{{site.assigned_PHI}}</td>
+  <td>{{site.description}}</td>
   <td>
-  <span class="badge badge-success">Active</span>
+  <span  class="badge badge-success"> {{site.status}} Active</span>
   </td>
   <td><button class="btn btn-square btn-block btn-dark" (click)=viewRoute(site)> View Route</button></td>
 
@@ -28,27 +28,11 @@
 
   </tbody>
   </table>
-  <!-- <nav>
-  <ul class="pagination">
-  <li class="page-item">
-  <a class="page-link" href="#">Prev</a>
-  </li>
-  <li class="page-item active">
-  <a class="page-link" href="#">1</a>
-  </li>
-  <li class="page-item">
-  <a class="page-link" href="#">2</a>
-  </li>
-  <li class="page-item">
-  <a class="page-link" href="#">3</a>
-  </li>
-  <li class="page-item">
-  <a class="page-link" href="#">4</a>
-  </li>
-  <li class="page-item">
-  <a class="page-link" href="#">Next</a>
-  </li>
-  </ul>
-  </nav> -->
   </div>
   </div>
+  <ngx-smart-modal #myModal identifier="myModal" [dismissable]=false>
+    <manage_investigation></manage_investigation>
+  </ngx-smart-modal>
+  <!-- <ngx-smart-modal #route identifier="route" [dismissable]=false>
+    <app-investigation-routes></app-investigation-routes >
+  </ngx-smart-modal> -->

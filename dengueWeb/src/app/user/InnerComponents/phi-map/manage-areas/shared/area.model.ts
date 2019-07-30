@@ -5,4 +5,10 @@ export class Area {
     AreaName :string;
     AreaCode:string;
     GpxName: string;
+    constructor(){
+        this.$key = '';
+        this.AreaName = '';
+        this.AreaCode = '';
+        this.GpxName = '';
+    }
 }

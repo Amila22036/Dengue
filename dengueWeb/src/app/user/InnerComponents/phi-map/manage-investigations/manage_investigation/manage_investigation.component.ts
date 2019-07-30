@@ -46,18 +46,38 @@ export class ManageInvestigationComponent implements OnInit {
     })  
   }
 
+  setSelectedGpx(userForm:NgForm){
+    return new Promise(resolve =>{
+      this.areaList.forEach(area =>{
+        if(userForm.value.area == area.AreaName)
+        {
+          this.manageInvestigationService.selectedAreaGpx = area.GpxName;
+          resolve();
+        }
+     })
+    })
+  }
+
   onSubmit(userForm:NgForm ){
-    if(userForm.value.$key == null)
-    {
-       this.manageInvestigationService.insertUser(userForm.value);
-      //  this.toastr.success('Submitted Successfully','User Register');
+
+  this.setSelectedGpx(userForm).then(
+    res=>{
+      if(userForm.value.$key == null)
+      {
+         this.manageInvestigationService.insertUser(userForm.value);
+        //  this.toastr.success('Submitted Successfully','User Register');
+      }
+      else
+      {
+        this.manageInvestigationService.updateUser(userForm.value);
+        // this.toastr.success('Updated Successfully','User Register');
+      }
+        this.resetForm(userForm);
+        
     }
-    else
-    {
-      this.manageInvestigationService.updateUser(userForm.value);
-      // this.toastr.success('Updated Successfully','User Register');
-    }
-      this.resetForm(userForm);
+  )
+    
+
       
   }
 
@@ -66,7 +86,8 @@ export class ManageInvestigationComponent implements OnInit {
       userForm.reset();
       this.manageInvestigationService.selectedUser={
         $key:null,
-        area:'',
+        area: '',
+        area_gpx_name:'',
         name:'',
         assigned_date:'',
         assigned_PHI: '',
@@ -75,6 +96,13 @@ export class ManageInvestigationComponent implements OnInit {
         status: '',
         description:''
       }
+  }
+
+  setAreaGpxName(area)
+  {
+    console.log("Area ",area)
+    this.manageInvestigationService.selectedAreaGpx = area.GpxName;
+    console.log("gpx ",this.manageInvestigationService.selectedAreaGpx)
   }
 
   backToInvestigationSites(){

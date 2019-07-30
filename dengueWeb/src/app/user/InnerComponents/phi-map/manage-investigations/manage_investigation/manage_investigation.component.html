@@ -39,8 +39,9 @@
   </div>
     <div class="form-group">
         <label>Area</label>
-            <select class="form-control" name="area" #area="ngModel" [(ngModel)]="manageInvestigationService.selectedUser.area" id="exampleFormControlSelect1">
-              <option *ngFor="let area of areaList">{{area.AreaName}}</option>
+            <select class="form-control" name="area" #area="ngModel" [(ngModel)]="manageInvestigationService.selectedUser.area" (click)="setAreaGpxName(area)"  id="exampleFormControlSelect1">
+              <option></option>
+              <option *ngFor="let area of areaList" >{{area.AreaName}}</option>
             </select>
           
         <!-- <input class="form-control" name="Email" type="email" ng-model [email]="true" #Email="ngModel" [(ngModel)]="manageInvestigationService.selectedUser.Email" placeholder="Email" required> -->
@@ -81,7 +82,6 @@
       <button class="btn btn-default" type="button" (click)="resetForm(userForm)">
         <i class="fa fa-repeat"></i>
         Reset</button>
-        <button class="btn btn-default" (click)="backToInvestigationSites()" type="button" >Back</button>
+        <!-- <button class="btn btn-default" (click)="backToInvestigationSites()" type="button" >Back</button> -->
     </div>
-
 </form>

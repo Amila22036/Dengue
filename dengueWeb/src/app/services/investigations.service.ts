@@ -20,8 +20,7 @@ export class InvestigationsService {
   getTotalDistance(allInvestigations : IinvestigationSitesModel[]): number{
     let totalDistance = 0;
     allInvestigations.forEach(element => {
-      totalDistance = element.distance + totalDistance;
-      
+      totalDistance = element.distance + totalDistance;     
     });
 
     return totalDistance;

@@ -45,6 +45,7 @@ export class MapService {
     }
     var map = L.map('map').setView(defaultCoords, defaultZoom);
     map.maxZoom = 100;
+    let gpxData = `https://firebasestorage.googleapis.com/v0/b/dengue-prevent.appspot.com/o/test%2F${this.currentSite.area_gpx_name}?alt=media&token=66e792c2-3fee-402a-a24d-a7fa32ff052d`;
   
     L.tileLayer('https://api.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -54,7 +55,7 @@ export class MapService {
     }).addTo(map);
     this.customLayer = L.geoJson(null,{style:myStyle})
 
-    var gpxLayer = omnivore.gpx(SAVED_ACTIVITIES.slice(0).find(invest => invest.id == id).gpxData , null ,this.customLayer)
+    var gpxLayer = omnivore.gpx(gpxData , null ,this.customLayer)
     .on('ready', function(){
       map.fitBounds(gpxLayer.getBounds());
     }).addTo(map)

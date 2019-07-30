@@ -50,7 +50,8 @@ import { RiskMapComponent } from './user/InnerComponents/risk-map/risk-map/risk-
 import { AngularFirestoreModule , AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { NgDatepickerModule } from 'ng2-datepicker';
-import { AreasService } from './user/InnerComponents/phi-map/manage-areas/shared/areas.service'
+import { AreasService } from './user/InnerComponents/phi-map/manage-areas/shared/areas.service';
+import { NgxSmartModalModule } from 'ngx-smart-modal';
 
 
 @NgModule({
@@ -95,7 +96,8 @@ import { AreasService } from './user/InnerComponents/phi-map/manage-areas/shared
     BrowserAnimationsModule,
     DndModule,
     AngularFirestoreModule,
-    NgDatepickerModule 
+    NgDatepickerModule,
+    NgxSmartModalModule.forRoot() 
   ],
   providers: [AuthService,MapService , UserService,UserResolver,AuthGuard,UsersService,ProjectService,
     ManageInvestigationService, AngularFirestore , AngularFireStorage, AreasService],
