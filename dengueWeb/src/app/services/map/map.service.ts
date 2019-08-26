@@ -62,37 +62,37 @@ export class MapService {
   }
 
 
-  plotRiskMap(){
-    // this.initializeMap();
+  // plotRiskMap(){
+  //   // this.initializeMap();
 
-    var baseURL = 'http://{s}.tile.cloudmade.com/{API}/{map_style}/256/{z}/{x}/{y}.png';
+  //   var baseURL = 'http://{s}.tile.cloudmade.com/{API}/{map_style}/256/{z}/{x}/{y}.png';
  
-    var base = L.tileLayer(baseURL, { 
-      API: mapAccesstoken, 
-      map_style: '44094'
-      });
+  //   var base = L.tileLayer(baseURL, { 
+  //     API: mapAccesstoken, 
+  //     map_style: '44094'
+  //     });
 
-    var map3 = L.map('map', {
-      layers : [base],
-      center : [44.65, -63.57],
-      zoom: 12 
-    });
+  //   var map3 = L.map('map', {
+  //     layers : [base],
+  //     center : [44.65, -63.57],
+  //     zoom: 12 
+  //   });
 
-    L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg', {
-      subdomains: '1234'
-    }).addTo( map3 );
+  //   L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg', {
+  //     subdomains: '1234'
+  //   }).addTo( map3 );
 
-    L.control.scale().addTo(map3);
+  //   L.control.scale().addTo(map3);
   
 
-    // dataPoints is an array of arrays: [[lat, lng, intensity]...]
-    var heat =  L.heatLayer([
-      [50.5, 30.5, 0.2], // lat, lng, intensity
-      [50.6, 30.4, 0.5],
-    ], {radius: 25}).addTo(map3);
+  //   // dataPoints is an array of arrays: [[lat, lng, intensity]...]
+  //   var heat =  L.heatLayer([
+  //     [50.5, 30.5, 0.2], // lat, lng, intensity
+  //     [50.6, 30.4, 0.5],
+  //   ], {radius: 25}).addTo(map3);
 
-    // map3.addLayer(heatmap);
-  }
+  //   // map3.addLayer(heatmap);
+  // }
 
 
   drawRoute() {

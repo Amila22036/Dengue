@@ -73,12 +73,9 @@ export class ManageInvestigationComponent implements OnInit {
         // this.toastr.success('Updated Successfully','User Register');
       }
         this.resetForm(userForm);
-        
-    }
-  )
-    
 
-      
+    }
+  )    
   }
 
   resetForm(userForm?:NgForm){

@@ -12,7 +12,7 @@ import { element } from 'protractor';
 
 })
 export class AreasListComponent implements OnInit {
-  
+  dtOptions: DataTables.Settings = {};
 areaList : Area[];
 p: number = 1;
 term='';
@@ -28,6 +28,10 @@ term='';
         this.areaList.push(y as Area);
       })
     })
+
+    this.dtOptions = {
+      lengthChange : false,
+    };
   }
 
   onEdit(area: Area){

@@ -1,4 +1,25 @@
-<p>
-  risk-map works!
-</p>
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+<!-- <button class="btn btn-default" (click)="Map()">Heat Map</button> -->
+            <h1>Dengue Vulnerable Areas</h1>
+            <p *ngIf="selectedTime != ''">For {{selectedTime}}</p>
+<ng-container *ngIf="showHeatMap == true">
 <div id="map"></div>
+</ng-container>
+    </div>
+    <div class="col-4">
+
+            <!-- <button class="btn btn-default" (click)="addEntry()">Heat Map</button> -->
+            <h2>Time Line</h2>
+            <mgl-timeline class="scrol">
+                    <mgl-timeline-entry *ngFor="let entry of heatMapService.RiskAreas.area">
+                        <mgl-timeline-entry-header (click)="setAreas(entry)">{{entry.week}}</mgl-timeline-entry-header>
+                        <mgl-timeline-entry-content (click)="setAreas(entry)">{{entry.areas.length}}</mgl-timeline-entry-content>
+                        <mgl-timeline-entry-side>2018</mgl-timeline-entry-side>
+                        <mgl-timeline-entry-dot (click)="setAreas(entry)" ></mgl-timeline-entry-dot>
+                    </mgl-timeline-entry>
+                </mgl-timeline>
+    </div>
+    </div>
+</div>

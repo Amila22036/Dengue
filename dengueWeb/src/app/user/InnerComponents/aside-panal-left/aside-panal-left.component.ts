@@ -33,4 +33,8 @@ export class AsidePanalLeftComponent implements OnInit {
   manageAreas(){
     this.mainUIService.fullContainer = FullPanelComponentEnum.AREAS;
   }
+
+  dashbord(){
+    this.mainUIService.fullContainer = FullPanelComponentEnum.DASHBORD;
+  }
 }

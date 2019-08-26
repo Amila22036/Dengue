@@ -52,7 +52,9 @@ import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage'
 import { NgDatepickerModule } from 'ng2-datepicker';
 import { AreasService } from './user/InnerComponents/phi-map/manage-areas/shared/areas.service';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
-
+import { DashbordComponent } from './user/dashbord/dashbord.component';
+import { MglTimelineModule } from 'angular-mgl-timeline';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -80,7 +82,8 @@ import { NgxSmartModalModule } from 'ngx-smart-modal';
     ManageAreasComponent,
     AreasListComponent,
     AreaComponent,
-    RiskMapComponent
+    RiskMapComponent,
+    DashbordComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +100,9 @@ import { NgxSmartModalModule } from 'ngx-smart-modal';
     DndModule,
     AngularFirestoreModule,
     NgDatepickerModule,
-    NgxSmartModalModule.forRoot() 
+    NgxSmartModalModule.forRoot(),
+    MglTimelineModule,
+    DataTablesModule
   ],
   providers: [AuthService,MapService , UserService,UserResolver,AuthGuard,UsersService,ProjectService,
     ManageInvestigationService, AngularFirestore , AngularFireStorage, AreasService],

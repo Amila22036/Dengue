@@ -14,12 +14,12 @@ export class NavigationComponent implements OnInit {
   ngOnInit() {
   }
 
-  popOver(){
-    console.log("On POP")
-    $('[data-toggle="popover"]').popover()
-$('.popover-dismiss').popover({
-  trigger: 'focus'
-})
+//   popOver(){
+//     console.log("On POP")
+//     $('[data-toggle="popover"]').popover()
+// $('.popover-dismiss').popover({
+//   trigger: 'focus'
+// })
 
-  }
+//   }
 }

@@ -4,6 +4,8 @@
 @import './assets/pace.css';
 @import './assets/pace.min.css';
 @import "~ngx-smart-modal/ngx-smart-modal";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 
 aside[class^="left"]{
     z-index: 2000 !important;

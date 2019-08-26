@@ -1,25 +1,26 @@
 <h6 class="text-center">Area details</h6>
-<label>Search</label>
-<input type="text" [(ngModel)]="term">
-<table class="table table-sm table-hover">
+
+<table  datatable class="table table-sm table-hover" [dtOptions]="dtOptions">
+  <thead>
   <tr>
     <th>Area Name</th>
     <th>Area Code</th>
     <th>Map</th>
+    <!-- <th style="visibility:hidden">buttons</th> -->
   </tr>
+  </thead>
+  <tbody>
   <tr *ngFor="let Area of areaList " (click)="onEdit(Area)">
     <td>{{Area.AreaName}}</td>
     <td>{{Area.AreaCode}}</td>
     <td>{{Area.GpxName}}</td>
-    <td>
-      <a class="btn" (click)="onEdit(Area)">
-        <i class="fa fa-pencil-square-o"></i>
-      </a>
+    <!-- <td>
       <a class="btn" (click)="onDelete(Area.$key)">
         <i class="fa fa-trash-o"></i>
       </a>
-    </td>
+    </td> -->
   </tr>
+  </tbody>
 </table>
 <div class="text-center">
   <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->

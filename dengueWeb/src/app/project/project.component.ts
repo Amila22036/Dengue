@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MainUIService } from '../services/main-ui.service';
-import { ProjectPanelComponentEnum } from '../shared/enums/mainUI.components.enums';
+import { ProjectPanelComponentEnum ,FullPanelComponentEnum} from '../shared/enums/mainUI.components.enums';
 import { ProjectService } from '../project/manage-project/shared/project.service';
 import { Project } from '../project/manage-project/shared/project.model';
 import { RouterModule, Routes ,Router} from '@angular/router';
@@ -44,6 +44,7 @@ export class ProjectComponent implements OnInit {
     }
 
     let url =  encodeURIComponent(btoa(JSON.stringify(projectSession)))
+    this.mainUIService.fullContainer = FullPanelComponentEnum.DASHBORD;
     this.route.navigateByUrl(`user/${url}`)
   }
 

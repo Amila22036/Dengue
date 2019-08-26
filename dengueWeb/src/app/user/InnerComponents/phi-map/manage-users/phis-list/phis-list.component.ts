@@ -13,9 +13,10 @@ import { element } from 'protractor';
 })
 export class PhisListComponent implements OnInit {
   
-phiList : Phi[];
-p: number = 1;
-term='';
+    phiList : Phi[];
+    p: number = 1;
+    term='';
+    dtOptions: DataTables.Settings = {};
   constructor(public userService: UsersService) { }
 
   ngOnInit() {

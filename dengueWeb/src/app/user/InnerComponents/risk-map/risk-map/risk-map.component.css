@@ -1,0 +1,6 @@
+#map{ height: 400px; }
+
+.scrol{
+    overflow-y: auto;
+    height: 95%;
+}
