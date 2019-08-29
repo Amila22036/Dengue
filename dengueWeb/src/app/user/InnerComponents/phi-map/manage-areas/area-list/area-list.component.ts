@@ -3,7 +3,7 @@ import { AreasService } from '../shared/areas.service';
 import {Area} from '../shared/area.model';
 import { element } from 'protractor';
 // import {ToastrService} from 'ngx-toastr';
-
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'area-list',
@@ -13,6 +13,7 @@ import { element } from 'protractor';
 })
 export class AreasListComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
 areaList : Area[];
 p: number = 1;
 term='';
@@ -28,10 +29,10 @@ term='';
         this.areaList.push(y as Area);
       })
     })
-
     this.dtOptions = {
       lengthChange : false,
     };
+    // this.dtTrigger.next();
   }
 
   onEdit(area: Area){

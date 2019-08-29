@@ -3,16 +3,26 @@
 // The list of file replacements can be found in `angular.json`.
 
 
+// firebase: {
+//   apiKey: 'AIzaSyDD4OekuDfWK8jN5Ch-4jRLBwZ7V-Kd2mI',
+//   authDomain: 'dengue-prevent.firebaseapp.com',
+//   databaseURL: 'https://dengue-prevent.firebaseio.com',
+//   projectId: 'dengue-prevent',
+//   storageBucket: 'dengue-prevent.appspot.com',
+//   messagingSenderId: '506156341698'
+// },
+
 export const environment = {
   production: false,
-  firebase: {
-    apiKey: 'AIzaSyDD4OekuDfWK8jN5Ch-4jRLBwZ7V-Kd2mI',
-    authDomain: 'dengue-prevent.firebaseapp.com',
-    databaseURL: 'https://dengue-prevent.firebaseio.com',
-    projectId: 'dengue-prevent',
-    storageBucket: 'dengue-prevent.appspot.com',
-    messagingSenderId: '506156341698'
-  },
+
+  firebase: {apiKey: "AIzaSyA9J8_exRK7MP1vfWv-PZoP_cAOdBh-bLY",
+  authDomain: "medidocsl2019.firebaseapp.com",
+  databaseURL: "https://medidocsl2019.firebaseio.com",
+  projectId: "medidocsl2019",
+  storageBucket: "medidocsl2019.appspot.com",
+  messagingSenderId: "796631340701",
+  appId: "1:796631340701:web:5f9b0a761933f200"},
+
   MAPBOX_API_KEY: 'pk.eyJ1IjoiYW1pbGEyMjAzNiIsImEiOiJjamc2M291b3kycnJsMndxcDhtZXdhaDlnIn0.byD49qq7-UMzR6XI6-gsww'
 
   

@@ -18,7 +18,7 @@
         <label>Phone number</label>
         <input class="form-control" name="PhoneNumber" #PhoneNumber="ngModel" [(ngModel)]="userService.selectedUser.PhoneNumber"  pattern="^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$" required>
     </div>  -->
-    <button class="btn btn-default" type="button" (click)="Map()"><ng-container *ngIf="mapService.isMapShowOnArea == false">Show map</ng-container><ng-container *ngIf="mapService.isMapShowOnArea == true">Hide map</ng-container></button>
+    <button class="btn btn-default" type="button" (click)="Map()"><ng-container *ngIf="mapService.isMapShowOnArea == false">Draw map</ng-container><ng-container *ngIf="mapService.isMapShowOnArea == true"></ng-container></button>
    <ng-container *ngIf="mapService.isMapShowOnArea == true">
     <div  id="map"></div>
     <a href="#" download="MyTracks.gpx" id="exportGPX">Export to file</a>

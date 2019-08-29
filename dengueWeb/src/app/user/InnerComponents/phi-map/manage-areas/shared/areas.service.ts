@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { Subject } from 'rxjs';
 import { AngularFireDatabase,AngularFireList} from 'angularfire2/database';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { Area} from './area.model';
@@ -12,6 +12,7 @@ export class AreasService {
   task: AngularFireUploadTask;
   selectedArea: Area = new Area();
   isgpxUploaded: boolean = false;
+  dtTrigger: Subject<any> = new Subject();
   constructor(private storage: AngularFireStorage, private firebase:AngularFireDatabase, public mapService:MapService) { }
 
   getData(){
@@ -19,7 +20,8 @@ export class AreasService {
     return this.areaList;
   }
 
-  insertUser(area : Area){
+  insertArea(area : Area){
+    return new Promise(resolve =>{
     let gpxFileNameId = `${new Date().getTime()}_${Math.floor((Math.random()*6)+1)}.gpx`;
     this.areaList.push({
       AreaName :area.AreaName,                                  
@@ -37,6 +39,8 @@ export class AreasService {
       )
     }
     this.getData();
+    resolve();
+    })
    }
 
    uploadGpx(gpxFileNameId){

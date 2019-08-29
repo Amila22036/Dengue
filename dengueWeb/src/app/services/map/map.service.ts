@@ -9,6 +9,9 @@ import 'leaflet-draw';
 import 'leaflet-webgl-heatmap';
 import createGpx from 'gps-to-gpx';
 import { saveAs } from 'file-saver';
+import '../../../assets/js/L.Realtime';
+import * as firebase from 'firebase/app';
+import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 // import 'webgl-heatmap';
 
 var mapAccesstoken = environment.MAPBOX_API_KEY;
@@ -30,7 +33,8 @@ export class MapService {
   gpxFile : any;
   isPolygonDrown:boolean = false;
   isMapShowOnArea : boolean = false;
-  constructor() { }
+  map2 :any;
+  constructor(public storage:AngularFireStorage) { }
 
   getInvestigation(id: number){
     return SAVED_ACTIVITIES.slice(0).find(x => x.id == id )
@@ -38,6 +42,17 @@ export class MapService {
 
   plotInvestigationRoute(id: number){
     // this.initializeMap();
+    debugger
+    let downloadUrlToken = '';
+    let storage = firebase.storage();
+   let storageRef =  this.storage.ref(`test/${this.currentSite.area_gpx_name}`);
+   var gsReference = storage.refFromURL(`gs://medidocsl2019.appspot.com/`)
+   var starsRef =  gsReference.child(`test/${this.currentSite.area_gpx_name}`);
+
+   starsRef.getDownloadURL().then(url => {
+    // Insert url into an <img> tag to "download"
+    console.log("yewwe ", url)
+    downloadUrlToken = url;
     var myStyle ={
       "color": "#3949AB",
       "weight": 5,
@@ -45,8 +60,8 @@ export class MapService {
     }
     var map = L.map('map').setView(defaultCoords, defaultZoom);
     map.maxZoom = 100;
-    let gpxData = `https://firebasestorage.googleapis.com/v0/b/dengue-prevent.appspot.com/o/test%2F${this.currentSite.area_gpx_name}?alt=media&token=66e792c2-3fee-402a-a24d-a7fa32ff052d`;
-  
+    // let gpxData = `https://firebasestorage.googleapis.com/v0/b/dengue-prevent.appspot.com/o/test%2F${this.currentSite.area_gpx_name}?alt=media&token=66e792c2-3fee-402a-a24d-a7fa32ff052d`;
+    let gpxData = downloadUrlToken;
     L.tileLayer('https://api.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
       maxZoom: 18,
@@ -59,40 +74,26 @@ export class MapService {
     .on('ready', function(){
       map.fitBounds(gpxLayer.getBounds());
     }).addTo(map)
+
+
+    var geojsonMarkerOptions = {
+      radius: 18,
+      fillColor: "#ff7800",
+      color: "#000",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 0.8
+  };
+
+  var marker = L.marker([7.323407, 80.643512], { title: "Test PHI" }).addTo(map);
+  })
+  .catch( err=>{
+    console.log("Error ", err)
+  })
+
   }
 
 
-  // plotRiskMap(){
-  //   // this.initializeMap();
-
-  //   var baseURL = 'http://{s}.tile.cloudmade.com/{API}/{map_style}/256/{z}/{x}/{y}.png';
- 
-  //   var base = L.tileLayer(baseURL, { 
-  //     API: mapAccesstoken, 
-  //     map_style: '44094'
-  //     });
-
-  //   var map3 = L.map('map', {
-  //     layers : [base],
-  //     center : [44.65, -63.57],
-  //     zoom: 12 
-  //   });
-
-  //   L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg', {
-  //     subdomains: '1234'
-  //   }).addTo( map3 );
-
-  //   L.control.scale().addTo(map3);
-  
-
-  //   // dataPoints is an array of arrays: [[lat, lng, intensity]...]
-  //   var heat =  L.heatLayer([
-  //     [50.5, 30.5, 0.2], // lat, lng, intensity
-  //     [50.6, 30.4, 0.5],
-  //   ], {radius: 25}).addTo(map3);
-
-  //   // map3.addLayer(heatmap);
-  // }
 
 
   drawRoute() {
@@ -101,18 +102,18 @@ export class MapService {
       "weight": 5,
       "opacity":0.4
     }
-    var map2 = L.map('map', {drawControl: true}).setView(defaultCoords, defaultZoom);
+    this.map2 = L.map('map', {drawControl: true}).setView(defaultCoords, defaultZoom);
 
-    map2.maxZoom = 100;  
+    this.map2.maxZoom = 100;  
     L.tileLayer('https://api.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
       maxZoom: 18,
       id: 'mapbox.streets',
       accessToken: mapAccesstoken
-    }).addTo(map2);
+    }).addTo(this.map2);
     this.customLayer = L.geoJson(null,{style:myStyle})
 
-    map2.on(L.Draw.Event.CREATED, (e) => {
+    this.map2.on(L.Draw.Event.CREATED, (e) => {
       var type = e.layerType,
         layer = e.layer;
       var latlon = e.layer._latlngs;
@@ -138,11 +139,11 @@ export class MapService {
       //  var blob = new Blob([gpx], {type: "text/plain;charset=utf-8"});
        this.isPolygonDrown = true;
       // saveAs(blob,'Gpx_Map.gpx');
-      this.isMapShowOnArea = false;
+      // this.isMapShowOnArea = false;
       console.log("gpx ", gpx)
       }
 
-      map2.addLayer(layer)
+      this.map2.addLayer(layer)
 
     });
 

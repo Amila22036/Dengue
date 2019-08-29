@@ -1,6 +1,7 @@
 <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
 
         <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="manageInvestigationService.selectedUser.$key">
+        <input *ngIf="manageInvestigationService.selectedUser.$key != null" type="hidden" name="area_gpx_name" area_gpx_name="ngModel" [(ngModel)]="manageInvestigationService.selectedUser.area_gpx_name">
     <div class="form-group">
       <!-- Areas need to load dynamically -->
     <label>Investigation Name</label>
@@ -61,12 +62,12 @@
   <div class="col-6">
       <div class="form-group">
           <label>Status</label>
-          <select class="form-control" name="status" #status="ngModel" [(ngModel)]="manageInvestigationService.selectedUser.status" >
-            <option value="1">To do</option>
-            <option value="2">In Prograss</option>
-            <option value="3">Done</option>
-            <option value="4">Rejected</option>
-            <option value="5">On Hold</option>
+          <select class="form-control" name="status" #status="ngModel" (change)="test()" [(ngModel)]="manageInvestigationService.selectedUser.status" >
+            <option [value]="InvestigationStatus.TODO">To do</option>
+            <option [value]="InvestigationStatus.IN_PROGRASS">In Prograss</option>
+            <option [value]="InvestigationStatus.DONE">Done</option>
+            <option [value]="InvestigationStatus.REJECTED">Rejected</option>
+            <option [value]="InvestigationStatus.ON_HOLD">On Hold</option>
             </select>
           <!-- <input class="form-control" name="PhoneNumber" #PhoneNumber="ngModel" [(ngModel)]="manageInvestigationService.selectedUser.PhoneNumber"  pattern="^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$" required> -->
       </div> 
@@ -78,8 +79,9 @@
         <!-- <input class="form-control" name="PhoneNumber" #PhoneNumber="ngModel" [(ngModel)]="manageInvestigationService.selectedUser.PhoneNumber"  pattern="^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$" required> -->
     </div> 
     <div class="form-group">
-      <button class="btn btn-default" type="submit" [disabled]="!userForm.valid">Submit</button>
-      <button class="btn btn-default" type="button" (click)="resetForm(userForm)">
+      <button class="btn btn-default" type="submit" *ngIf="manageInvestigationService.selectedUser.$key == null" [disabled]="!userForm.valid">Submit</button>
+      <button class="btn btn-default" type="submit" *ngIf="manageInvestigationService.selectedUser.$key != null" [disabled]="!userForm.valid">Update</button>
+      <button class="btn btn-default" type="button" *ngIf="manageInvestigationService.selectedUser.$key == null" (click)="resetForm(userForm)">
         <i class="fa fa-repeat"></i>
         Reset</button>
         <!-- <button class="btn btn-default" (click)="backToInvestigationSites()" type="button" >Back</button> -->

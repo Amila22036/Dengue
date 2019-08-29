@@ -2,6 +2,7 @@ import { Component, OnInit,HostListener } from '@angular/core';
 import { AreasService } from '../shared/areas.service';
 import {NgForm,FormBuilder,FormGroup,Validators} from '@angular/forms';
 import { MapService } from '../../../../../services/map/map.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'area-map',
@@ -34,18 +35,34 @@ export class AreaComponent implements OnInit {
     }
   }
 
-  onSubmit(userForm:NgForm){
-    if(userForm.value.$key == null)
+  onSubmit(areaForm:NgForm){
+    if(areaForm.value.$key == null)
     {
-       this.areasService.insertUser(userForm.value);
+       this.areasService.insertArea(areaForm.value).then(
+         res=>{
+          swal.fire(
+            'Saved!',
+            'Your data has been saved.',
+            'success'
+          ) 
+          this.areasService.dtTrigger.next();
+         }
+       )
       //  this.toastr.success('Submitted Successfully','User Register');
     }
     else
     {
-      this.areasService.updateUser(userForm.value);
+      this.areasService.updateUser(areaForm.value);
       // this.toastr.success('Updated Successfully','User Register');
     }
-      this.resetForm(userForm);
+      this.resetForm(areaForm);
+      this.mapService.map2.remove();
+      this.mapService.isMapShowOnArea = false;
+      swal.fire(
+        'Saved!',
+        'Your data has been saved.',
+        'success'
+      ) 
       
   }
 

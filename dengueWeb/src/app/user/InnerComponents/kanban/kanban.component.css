@@ -1,3 +1,11 @@
 .full{
     height:530px
 }
+
+.f-size-s{
+    font-size: 10px;
+}
+
+.csr{
+    cursor: pointer;
+}

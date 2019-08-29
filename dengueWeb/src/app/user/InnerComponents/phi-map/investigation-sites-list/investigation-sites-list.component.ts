@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { IinvestigationSitesModel } from '../../../../shared/investigation-sites.model';
 import { InvestigationsService } from '../../../../services/investigations.service';
-import { FullPanelComponentEnum } from '../../../../shared/enums/mainUI.components.enums';
+import { FullPanelComponentEnum ,InvestigationStatus} from '../../../../shared/enums/mainUI.components.enums';
 import { MainUIService } from '../../../../services/main-ui.service';
 import { MapService } from '../../../../services/map/map.service';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { ManageInvestigationService } from '../manage-investigations/shared/manage_investigation.service';
 import { Investigation } from '../manage-investigations/shared/manage_investigation.model';
+import swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-investigation-sites-list',
@@ -20,11 +22,14 @@ export class InvestigationSitesListComponent implements OnInit {
   totalDistance: number;
   firstDate: string;
   investigationList : Investigation [];
+  InvestigationStatus;
 
   constructor(private _investigationService:InvestigationsService ,
      public mainUIService:MainUIService ,public mapService: MapService,
      public ngxSmartModalService:NgxSmartModalService,
-     public manageInvestigationService:ManageInvestigationService) { }
+     public manageInvestigationService:ManageInvestigationService) { 
+       this.InvestigationStatus = InvestigationStatus;
+     }
 
   ngOnInit() {
     this.investigations = this._investigationService.getInvestigations();
@@ -56,4 +61,33 @@ export class InvestigationSitesListComponent implements OnInit {
    // this.mainUIService.fullContainer = FullPanelComponentEnum.NEW_INVESTIGATION;
   }
 
+  deleteInvestigation(key){
+    swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {       
+        this.manageInvestigationService.deleteInvestigation(key).then(res => {
+            swal.fire(
+              'Deleted!',
+              'Your data has been deleted.',
+              'success'
+            )    
+            this.manageInvestigationService.dtTrigger.next();     
+        }).catch( res =>{   
+          swal.fire(
+            'Failed!',
+            `Something Went Wrong !`,
+            'error'
+          )
+        })
+      }
+    })
+
+  }
 }

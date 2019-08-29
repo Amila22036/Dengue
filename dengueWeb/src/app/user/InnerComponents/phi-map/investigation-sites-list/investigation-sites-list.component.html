@@ -1,8 +1,8 @@
-<div class="card ilumi">
+<div class="card ilumi b-clr ">
   <div class="card-header">
-  <i class="fa fa-align-justify"></i> Combined All Table</div>
+  <i class="fa fa-align-justify"></i> Investigations </div>
   <div class="card-body">
-  <table datatable class="table table-responsive-sm table-bordered table-striped table-sm">
+  <table  class="table table-responsive-sm table-bordered table-hover table-sm" datatable >
   <thead>
   <tr >
   <th>name</th>
@@ -10,6 +10,7 @@
   <th>Discription</th>
   <th>Status</th>
   <th><button _ngcontent-c13="" aria-pressed="true" (click)="newInvestigation()" class="btn btn-block btn-ghost-secondary active" type="button">New Investigation</button></th>
+  <th style="visibility: hidden">delete</th>
   </tr>
   </thead>
   <tbody>
@@ -18,9 +19,14 @@
   <td>{{site.assigned_PHI}}</td>
   <td>{{site.description}}</td>
   <td>
-  <span  class="badge badge-success"> {{site.status}} Active</span>
-  </td>
+  <span  class="badge badge-primary" *ngIf="site.status == InvestigationStatus.TODO">To do</span>
+  <span  class="badge badge-warning" *ngIf="site.status == InvestigationStatus.IN_PROGRASS">In Prograss</span>
+  <span  class="badge badge-success" *ngIf="site.status == InvestigationStatus.DONE">Done</span>
+  <span  class="badge badge-dark" *ngIf="site.status == InvestigationStatus.REJECTED">Rejected</span>
+  <span  class="badge badge-secondary" *ngIf="site.status == InvestigationStatus.ON_HOLD">On hold</span>  
+</td>
   <td><button class="btn btn-square btn-block btn-dark" (click)=viewRoute(site)> View Route</button></td>
+  <td><button class="btn btn-square btn-danger" (click)="deleteInvestigation(site.$key)"> Delete </button></td>
 
   </tr>
 

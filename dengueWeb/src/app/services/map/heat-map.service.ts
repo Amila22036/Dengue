@@ -43,7 +43,7 @@ export class HeatMapService {
 
   getRiskAreas(){
     this.RiskAreas = {area:[ {id: 1,week:'1/9/2019',areas :[{lat: 6.927079, lng:79.861244, count: 3},{lat: 6.937079, lng: 80.861244, count: 1}]},
-                    {id: 2,week:'8/9/2019',areas :[{lat: 6.927079, lng:79.861244, count: 3},{lat:6.0535 , lng:80.2210, count: 5},{lat: 6.937079, lng: 80.861244, count: 2}]},
+                    {id: 2,week:'8/9/2019',areas :[{lat: 6.927079, lng:79.861244, count: 3},{lat:6.0535 , lng:80.2210, count: 5},{lat:6.1385 , lng:80.1908, count: 4},{lat:6.1085 , lng:80.2126, count: 4},{lat: 6.937079, lng: 80.861244, count: 2}]},
                     {id: 3,week:'15/9/2019',areas :[{lat: 6.927079, lng:79.861244, count: 3},{lat:6.5854, lng:79.9607, count: 6},{lat: 6.937079, lng: 80.861244, count: 3}]}]}
   }
 

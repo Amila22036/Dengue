@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ManageInvestigationService } from '../shared/manage_investigation.service';
 import {NgForm,FormBuilder,FormGroup,Validators} from '@angular/forms';
-import { FullPanelComponentEnum } from '../../../../../shared/enums/mainUI.components.enums';
+import { FullPanelComponentEnum ,InvestigationStatus } from '../../../../../shared/enums/mainUI.components.enums';
 import { MainUIService } from '../../../../../services/main-ui.service';
 import { AreasService } from '../../manage-areas/shared/areas.service';
 import { UsersService } from '../../manage-users/shared/users.service';
 import { Area} from '../../manage-areas/shared/area.model';
 import { Phi } from '../../manage-users/shared/user.model';
+import { NgxSmartModalService } from 'ngx-smart-modal';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'manage_investigation',
@@ -16,12 +18,14 @@ import { Phi } from '../../manage-users/shared/user.model';
 })
 export class ManageInvestigationComponent implements OnInit {
   areaList = [];
-  phiList=[]
+  phiList=[];
+  private InvestigationStatus;
   constructor(public manageInvestigationService : ManageInvestigationService,
-    public mainUIService:MainUIService, public areasService:AreasService, public userService:UsersService ) { 
+    public mainUIService:MainUIService, public areasService:AreasService, public userService:UsersService,
+    public ngxSmartModalService:NgxSmartModalService ) { 
       this.manageInvestigationService.getData();
 
-
+      this.InvestigationStatus = InvestigationStatus;
     }
   ngOnInit() {
     var x= this.areasService.getData();
@@ -64,18 +68,37 @@ export class ManageInvestigationComponent implements OnInit {
     res=>{
       if(userForm.value.$key == null)
       {
-         this.manageInvestigationService.insertUser(userForm.value);
+         this.manageInvestigationService.insertInvestigation(userForm.value).then(
+           res=>{
+            swal.fire(
+              'Added!',
+              'Your data saved successfully',
+              'success'
+            )
+            this.ngxSmartModalService.getModal('myModal').close();
+           }         
+         )
         //  this.toastr.success('Submitted Successfully','User Register');
+        this.resetForm(userForm);
+       
       }
       else
       {
-        this.manageInvestigationService.updateUser(userForm.value);
-        // this.toastr.success('Updated Successfully','User Register');
+        this.manageInvestigationService.updateInvestigation(userForm.value).then(
+          res=>{
+              // this.toastr.success('Updated Successfully','User Register');
+          }
+        )
+        
       }
-        this.resetForm(userForm);
-
+ 
     }
   )    
+  }
+
+
+  test(){
+    console.log(" test ", this.manageInvestigationService.selectedUser.status)
   }
 
   resetForm(userForm?:NgForm){
@@ -105,5 +128,7 @@ export class ManageInvestigationComponent implements OnInit {
   backToInvestigationSites(){
     this.mainUIService.fullContainer = FullPanelComponentEnum.INVESTIGATION
   }
+
+
 
 }

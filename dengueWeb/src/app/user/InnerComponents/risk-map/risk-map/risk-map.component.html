@@ -15,7 +15,7 @@
             <mgl-timeline class="scrol">
                     <mgl-timeline-entry *ngFor="let entry of heatMapService.RiskAreas.area">
                         <mgl-timeline-entry-header (click)="setAreas(entry)">{{entry.week}}</mgl-timeline-entry-header>
-                        <mgl-timeline-entry-content (click)="setAreas(entry)">{{entry.areas.length}}</mgl-timeline-entry-content>
+                        <mgl-timeline-entry-content (click)="setAreas(entry)">No Of total Areas : {{entry.areas.length}}</mgl-timeline-entry-content>
                         <mgl-timeline-entry-side>2018</mgl-timeline-entry-side>
                         <mgl-timeline-entry-dot (click)="setAreas(entry)" ></mgl-timeline-entry-dot>
                     </mgl-timeline-entry>

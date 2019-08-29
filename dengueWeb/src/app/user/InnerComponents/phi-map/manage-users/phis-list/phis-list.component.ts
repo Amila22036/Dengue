@@ -3,6 +3,7 @@ import {UsersService} from '../shared/users.service';
 import { Phi } from '../shared/user.model';
 import { element } from 'protractor';
 // import {ToastrService} from 'ngx-toastr';
+import { Subject } from 'rxjs'
 
 
 @Component({
@@ -12,7 +13,8 @@ import { element } from 'protractor';
 
 })
 export class PhisListComponent implements OnInit {
-  
+  dtTrigger: Subject<any> = new Subject();
+
     phiList : Phi[];
     p: number = 1;
     term='';
@@ -28,7 +30,25 @@ export class PhisListComponent implements OnInit {
         y["$key"] =element.key;
         this.phiList.push(y as  Phi);
       })
+      this.dtTrigger.next()
     })
+
+  }
+
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
+  }
+
+  reloadTable(){
+    $.fn.dataTable.ext.errMode = 'throw';
+    setTimeout(() => {
+      var table = $('#test').DataTable();    
+      table.clear();
+      this.phiList.forEach(phi =>{
+        table.row.add(phi);
+      })
+    }, 1000);
+ 
   }
 
   onEdit(phi: Phi){

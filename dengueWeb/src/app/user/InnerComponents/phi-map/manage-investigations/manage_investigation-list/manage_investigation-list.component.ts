@@ -38,7 +38,7 @@ term='';
   onDelete(key : string){
     if(confirm('Do you really want to delete this record?')==true)
     {
-      this.manageInvestigationService.deleteUser(key);
+      this.manageInvestigationService.deleteInvestigation(key);
       // this.toastr.warning("Deleted successfully","User records");
     }
   }

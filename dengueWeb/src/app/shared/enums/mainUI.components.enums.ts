@@ -14,3 +14,11 @@ export enum ProjectPanelComponentEnum{
     PROJECT = 0,
     MANAGE_PROJECTS = 1
 }
+
+export enum InvestigationStatus{
+    TODO = 1,
+    IN_PROGRASS = 2, 
+    DONE = 3,
+    REJECTED = 4,
+    ON_HOLD = 5
+}

@@ -1,58 +1,96 @@
 <div class="container">
   <div class="row">
+    <div class="col-md-12"><h3>Investigation board</h3></div>
     <div class="col-md-3">
     <!-- To Do -->
           <div class="card full">
-              <div class="card-header">To Do
-              <span class="badge badge-success float-right">Success</span>
+              <div class="card-header">
+              <span class="badge badge-primary float-right">To Do</span>
               </div>
-              <div class="card-body">
-                <div class="card">
-                  
+              <div class="card-body" dndDropzone (dndDragover)="onDragover($event)"
+              (dndDrop)="onDrop($event , InvestigationStatus.TODO)">
+                <div class="card" *ngFor="let investigation of ToDoList"  >
+                  <div class="card-header csr" [dndDraggable]="investigation"
+                  [dndEffectAllowed]="draggable.effectAllowed" (dndStart)="onDragStart($event)" (dblclick)="view(investigation)">
+                      {{investigation.name}}
+                  </div>              
                 </div>
-
-
               </div>
           </div>    
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <!-- On Process -->
         <div class="card full">
-            <div class="card-header">On Process
-            <span class="badge badge-success float-right">Success</span>
+            <div class="card-header">
+            <span class="badge badge-warning float-right">In Prograss</span>
             </div>
-            <div class="card-body">
-              <div class="card">
-                
-              </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <!-- Done -->
-        <div class="card full">
-            <div class="card-header">Done
-            <span class="badge badge-success float-right">Success</span>
-            </div>
-            <div class="card-body">
-              <div class="card">
-                
-              </div>
+            <div class="card-body" dndDropzone (dndDragover)="onDragover($event)"
+            (dndDrop)="onDrop($event , InvestigationStatus.IN_PROGRASS)">
+                <div class="card" *ngFor="let investigation of InPrograssList">
+                    <div class="card-header f-size-s csr" [dndDraggable]="investigation"
+                    [dndEffectAllowed]="draggable.effectAllowed" (dndStart)="onDragStart($event)" (dblclick)="view(investigation)">
+                        {{investigation.name}}
+                    </div>              
+                  </div>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
+      <!-- Rejected -->
+      <div class="card full">
+          <div class="card-header">
+          <span class="badge badge-secondary float-right">on Hold</span>
+          </div>
+          <div class="card-body" dndDropzone (dndDragover)="onDragover($event)"
+          (dndDrop)="onDrop($event , InvestigationStatus.ON_HOLD)">
+              <div class="card" *ngFor="let investigation of OnHoldList">
+                  <div class="card-header f-size-s csr" [dndDraggable]="investigation"
+                  [dndEffectAllowed]="draggable.effectAllowed" (dndStart)="onDragStart($event)" (dblclick)="view(investigation)">
+                     {{investigation.name}}
+                  </div>              
+                </div>
+          </div>
+      </div>
+</div>
+
+    <div class="col-md-2">
               <!-- Rejected -->
               <div class="card full">
-                  <div class="card-header">Rejected
-                  <span class="badge badge-success float-right">Success</span>
+                  <div class="card-header">
+                  <span class="badge badge-dark float-right">Rejected</span>
                   </div>
-                  <div class="card-body">
-                    <div class="card">
-                      
-                    </div>
+                  <div class="card-body" dndDropzone (dndDragover)="onDragover($event)"
+                  (dndDrop)="onDrop($event , InvestigationStatus.REJECTED)">
+                      <div class="card" *ngFor="let investigation of RejectedList">
+                          <div class="card-header f-size-s csr" [dndDraggable]="investigation"
+                          [dndEffectAllowed]="draggable.effectAllowed" (dndStart)="onDragStart($event)"  (dblclick)="view(investigation)">
+                             {{investigation.name}}
+                          </div>              
+                      </div>
                   </div>
               </div>
     </div>
+    <div class="col-md-3">
+      <!-- Done -->
+      <div class="card full">
+          <div class="card-header">
+          <span class="badge badge-success float-right">Done</span>
+          </div>
+          <div class="card-body"  dndDropzone (dndDragover)="onDragover($event)"
+          (dndDrop)="onDrop($event , InvestigationStatus.DONE)">
+              <div class="card" *ngFor="let investigation of DoneList">
+                  <div class="card-header csr"  [dndDraggable]="investigation"
+                  [dndEffectAllowed]="draggable.effectAllowed" (dndStart)="onDragStart($event)" (dblclick)="view(investigation)">
+                     {{investigation.name}}
+                  </div>              
+              </div>
+          </div>
+      </div>
+  </div>
+
   </div>
 </div>
+
+<ngx-smart-modal #viewM identifier="viewM" [dismissable]=false>
+    <manage_investigation></manage_investigation>
+  </ngx-smart-modal>
