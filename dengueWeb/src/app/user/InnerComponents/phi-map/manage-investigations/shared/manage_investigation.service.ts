@@ -30,7 +30,7 @@ export class ManageInvestigationService {
         description: investigation.description,
       }).then(
         res=>{
-          this.getData();
+          // this.getData();
           this.dtTrigger.next();
           resolve()
         }
@@ -43,7 +43,7 @@ export class ManageInvestigationService {
      return new Promise(resolve =>{
       this.investigationList.update(investigation.$key,{
         area : investigation.area,
-        area_gpx_name: investigation.area_gpx_name,
+        area_gpx_name: this.selectedAreaGpx,
         name : investigation.name,
         assigned_PHI: investigation.assigned_PHI,
         start_date: investigation.start_date,

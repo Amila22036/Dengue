@@ -5,6 +5,8 @@ import { Investigation } from '../phi-map/manage-investigations/shared/manage_in
 import { FullPanelComponentEnum ,InvestigationStatus} from '../../../shared/enums/mainUI.components.enums';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import swal from 'sweetalert2';
+import { AreasService } from '../phi-map/manage-areas/shared/areas.service';
+import {Area} from '../phi-map/manage-areas/shared/area.model';
 
 @Component({
   selector: 'app-kanban',
@@ -20,8 +22,10 @@ export class KanbanComponent implements OnInit {
   DoneList = [];
   InvestigationStatus;
   InvestigationPromisses = [];
+  areaList : Area[];
   constructor(public manageInvestigationService:ManageInvestigationService,
-    public ngxSmartModalService:NgxSmartModalService 
+    public ngxSmartModalService:NgxSmartModalService,
+    public areasService:AreasService
    ) { 
     this.InvestigationStatus = InvestigationStatus;
   }
@@ -29,7 +33,19 @@ export class KanbanComponent implements OnInit {
   ngOnInit() {
 
 this.getAndSetInvestigations();
+this.getAreas();
+  }
 
+  getAreas(){
+    var x= this.areasService.getData();
+    x.snapshotChanges().subscribe(item =>{
+      this.areaList=[];
+      item.forEach(element =>{
+        var y=element.payload.toJSON();
+        y["$key"] =element.key;
+        this.areaList.push(y as Area);
+      })
+    })
   }
 
   getInvestigations(){
@@ -130,11 +146,13 @@ this.getAndSetInvestigations();
   }
   
   onDrop(event:DndDropEvent,status) {
+
     console.log("on drop",event.data);
     console.log("Status ",status);
     let investigationData = event.data;
     investigationData.status = status;
-    console.log("Inves data ",investigationData )
+    console.log("Inves data ",investigationData.area )
+    this.setSelectedGpx(investigationData.area).then(res =>{
     this.manageInvestigationService.updateInvestigation(investigationData).then(
       res=>{
         this.getAndSetInvestigations();
@@ -145,6 +163,7 @@ this.getAndSetInvestigations();
         )
       }
     )
+  })
 
     console.log("dropped", JSON.stringify(event, null, 2));
   }
@@ -153,5 +172,17 @@ this.getAndSetInvestigations();
     console.log("double clicked",investigation);
     this.manageInvestigationService.selectedUser = investigation;
     this.ngxSmartModalService.getModal('viewM').open();
+  }
+
+  setSelectedGpx(formAreaName){
+    return new Promise(resolve =>{
+      this.areaList.forEach(area =>{  
+        if(formAreaName == area.AreaName)
+        {
+          this.manageInvestigationService.selectedAreaGpx = area.GpxName;
+          resolve();
+        }
+     })
+    })
   }
 }

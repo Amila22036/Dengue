@@ -6,4 +6,7 @@ export class Phi {
     LastName:string;
     Email : string;
     PhoneNumber: number;
+    Password: string;
+    Confirm_password: string;
+    Age: number;
 }

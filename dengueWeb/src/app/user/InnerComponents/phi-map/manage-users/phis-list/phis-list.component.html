@@ -6,7 +6,7 @@
     <th>Last Name</th>
     <th>Email</th>
     <th>Phone Number</th>
-  
+    <th style="visibility: hidden">delete</th>
   </tr>
 </thead>
 <tbody>
@@ -16,7 +16,7 @@
         <td>{{phi.LastName}}</td>
       <td>{{phi.Email}}</td>
       <td>{{phi.PhoneNumber}}</td>
-     
+      <td><button class="btn btn-square btn-danger" (click)="deletePHI(phi.$key)"> Delete </button></td>
       <!-- <td>
         <a class="btn" (click)="onDelete(phi.$key)">
           <i class="fa fa-trash-o"></i>

@@ -72,7 +72,11 @@ export class PhiComponent implements OnInit {
         FirstName:'',
         LastName:'',
         Email:'',
-        PhoneNumber:0
+        PhoneNumber:0,
+        Age:0,
+        Password:'',
+        Confirm_password:''
+
       }
   }
 

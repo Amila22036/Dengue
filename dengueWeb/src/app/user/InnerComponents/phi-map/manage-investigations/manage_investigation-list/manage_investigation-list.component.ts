@@ -27,6 +27,7 @@ term='';
         y["$key"] =element.key;
         this.investigationList.push(y as Investigation);
       })
+      console.log("PHI List ",this.investigationList)
     })
   }
 

@@ -2,6 +2,7 @@
     font-size: 4rem;
     font-weight: 300;
     margin-left: 42%;
+    margin-top: -34px;
 }
 
 .txt{
@@ -11,4 +12,41 @@
 }
 .cmgin{
     margin-left: 38%;
+}
+
+.psition{
+    margin-top: 10px;
+}
+
+.ptn{
+    margin-top: 10px;
+}
+
+.bdg-todo{
+    background-color: #20a8d8;
+}
+
+.bdg-inprograss{
+    background-color:#ffc107;
+}
+
+.bdg-done{
+    background-color:#4dbd74;
+}
+
+.bdg-reject{
+    background-color:#a4a6a9;
+}
+
+.sub-head{
+    font-weight: bold;
+}
+
+.v-areas{
+    font-size: 15px;
+    margin-left: 30%;
+}
+
+.mgin-areas{
+    margin-top:6%;
 }

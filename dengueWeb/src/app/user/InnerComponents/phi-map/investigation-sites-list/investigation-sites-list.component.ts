@@ -35,12 +35,14 @@ export class InvestigationSitesListComponent implements OnInit {
     this.investigations = this._investigationService.getInvestigations();
     var x= this.manageInvestigationService.getData();
     x.snapshotChanges().subscribe(item =>{
+      console.log("inves item ",JSON.stringify(item))
       this.investigationList=[];
       item.forEach(element =>{
         var y=element.payload.toJSON();
-        y["$key"] =element.key;
+        y["$key"] = element.key;
         this.investigationList.push(y as Investigation);
       })
+      console.log("inves ", JSON.stringify(this.investigationList))
     })
 
     this.totalInvestigations = this._investigationService.getTotalInvestigations(this.investigations);

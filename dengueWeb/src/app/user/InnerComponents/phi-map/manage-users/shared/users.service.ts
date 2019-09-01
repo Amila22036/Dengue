@@ -22,7 +22,11 @@ export class UsersService {
         FirstName :phi.FirstName,
         LastName :phi.LastName,
         Email :phi.Email,
-        PhoneNumber :phi.PhoneNumber
+        PhoneNumber :phi.PhoneNumber,
+        Age: phi.Age,
+        Confirm_password: phi.Confirm_password,
+        Password: phi.Password
+
       }).then(
         res=>{
           this.getData();
@@ -42,7 +46,10 @@ export class UsersService {
         FirstName : phi.FirstName,
         LastName : phi.LastName,
         Email : phi.Email,
-        PhoneNumber : phi.PhoneNumber
+        PhoneNumber : phi.PhoneNumber,
+        Age: phi.Age,
+        Confirm_password: phi.Confirm_password,
+        Password: phi.Password
       }).then(
         res=>{
           resolve();
@@ -55,7 +62,14 @@ export class UsersService {
    }
 
    deleteUser($key:string){
-     this.phiList.remove($key);
+     return new Promise((resolve, reject)=>{
+      this.phiList.remove($key).then(res=>{
+        resolve();
+      }).catch(err=>{
+        reject();
+      })
+     })
+    
    }
 
 

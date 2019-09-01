@@ -1,8 +1,6 @@
 <div class="container">
-<div class="row">
+<div class="row ptn">
     <div class="col-sm-6 col-lg-4">
-        <br>
-        <br>
       <div class="card text-white bg-info ">
         <div class="card-body pb-0"> 
           <div class="txt-value">{{NoOfAreas}}</div>
@@ -13,8 +11,6 @@
     </div>
     <!-- /.col-->
     <div class="col-sm-6 col-lg-4">
-        <br>
-        <br>
       <div class="card text-white bg-info ">
         <div class="card-body pb-0">
   
@@ -26,18 +22,72 @@
     </div>
     <!-- /.col-->
     <div class="col-sm-6 col-lg-4">
-        <br>
-        <br>
       <div class="card text-white bg-warning ">
         <div class="card-body pb-0">
   
           <div class="txt-value">10</div>
-          <div class="txt">No Of Dengue Privileged Areas</div>
+          <div class="txt">No Of Dengue vulnerable Areas</div>
         </div>
    
       </div>
     </div>
   </div>
+  <div class="row">
+      <div class="col-4">
+
+
+
+
+          <select [(ngModel)]="area" (change)="filterExact('area', area)"  class="form-control mgin-areas">
+              <option [value]=0 disabled selected>Select an area</option> 
+            <option  *ngFor="let area of areaList" [value]="area.AreaName">{{area.AreaName}}</option>
+            </select>
+          
+            <button *ngIf="area"
+                    (click)="removeFilter('area')" class="btn btn-info psition">        
+                    Remove filter
+            </button>
+
+            <div class="card" style="margin-top: 2%;width: 100%;">
+                <div class="card-body">
+                  <h5 class="card-title">Current Investigations</h5>
+                  <div *ngFor="let investigation of filteredInvestigationList" >
+                      <div [ngClass]="{
+                        'bdg-todo':investigation.status === InvestigationStatus.TODO,
+                        'bdg-inprograss':investigation.status === InvestigationStatus.IN_PROGRASS,
+                        'bdg-done':investigation.status === InvestigationStatus.DONE,
+                        'bdg-reject':investigation.status === InvestigationStatus.REJECTED
+                      }">
+                          <h6>{{investigation.name}}</h6>
+                          <!-- <img [src]="animal.image"> -->
+                          <ul>
+                            <li> <span class="sub-head">Assigned Phi:</span> {{investigation.assigned_PHI}}</li>
+                            <li> <span class="sub-head">Status:</span>   
+                              <span  class="badge badge-primary" *ngIf="investigation.status == InvestigationStatus.TODO">To do</span>
+                              <span  class="badge badge-warning" *ngIf="investigation.status == InvestigationStatus.IN_PROGRASS">In Prograss</span>
+                              <span  class="badge badge-success" *ngIf="investigation.status == InvestigationStatus.DONE">Done</span>
+                              <span  class="badge badge-dark" *ngIf="investigation.status == InvestigationStatus.REJECTED">Rejected</span>
+                              <span  class="badge badge-secondary" *ngIf="investigation.status == InvestigationStatus.ON_HOLD">On hold</span> </li>
+                            <!-- <li>Weight: {{animal.weight}} pounds</li>
+                            <li>Endangered: {{animal.endangered}}</li> -->
+                          </ul>
+                        </div>
+                        </div>
+                </div>
+              </div>
+
+      </div>
+
+  
+      <div class="col-8">
+        <span class="v-areas">No Of Dengue Vulnerable Areas with Time</span>
+          <div #chart>
+              <!-- Chart will appear here -->
+            </div>
+      </div>
+
+  </div>
+
   </div>
 
  

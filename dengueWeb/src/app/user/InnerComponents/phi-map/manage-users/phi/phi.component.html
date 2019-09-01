@@ -18,6 +18,18 @@
         <input class="form-control" name="PhoneNumber" #PhoneNumber="ngModel" [(ngModel)]="userService.selectedUser.PhoneNumber"  pattern="^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$" required>
     </div> 
     <div class="form-group">
+        <label>Age</label>
+        <input class="form-control" name="Age" #Age="ngModel" [(ngModel)]="userService.selectedUser.Age"  required>
+    </div> 
+    <div class="form-group">
+        <label>Password</label>
+        <input class="form-control pwd" name="Password" #Password="ngModel" [(ngModel)]="userService.selectedUser.Password"  required>
+    </div> 
+    <div class="form-group">
+        <label>Confirm_password</label>
+        <input class="form-control pwd" name="Confirm_password" #Confirm_password="ngModel" [(ngModel)]="userService.selectedUser.Confirm_password"  required>
+    </div> 
+    <div class="form-group">
       <button class="btn btn-default" type="submit" [disabled]="!userForm.valid">Submit</button>
       <button class="btn btn-default" type="button" (click)="resetForm(userForm)">
         <i class="fa fa-repeat"></i>

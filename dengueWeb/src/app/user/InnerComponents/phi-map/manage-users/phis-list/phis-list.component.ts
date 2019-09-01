@@ -4,7 +4,7 @@ import { Phi } from '../shared/user.model';
 import { element } from 'protractor';
 // import {ToastrService} from 'ngx-toastr';
 import { Subject } from 'rxjs'
-
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'phis-list',
@@ -22,6 +22,7 @@ export class PhisListComponent implements OnInit {
   constructor(public userService: UsersService) { }
 
   ngOnInit() {
+    $.fn.dataTable.ext.errMode = 'throw';
     var x= this.userService.getData();
     x.snapshotChanges().subscribe(item =>{
       this.phiList=[];
@@ -56,12 +57,35 @@ export class PhisListComponent implements OnInit {
       console.log(phi);
   }
 
-  onDelete(key : string){
-    if(confirm('Do you really want to delete this record?')==true)
-    {
-      this.userService.deleteUser(key);
-      // this.toastr.warning("Deleted successfully","User records");
-    }
+
+  deletePHI(key){
+    swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {       
+        this.userService.deleteUser(key).then(res => {
+            swal.fire(
+              'Deleted!',
+              'Your data has been deleted.',
+              'success'
+            )    
+            this.dtTrigger.next();     
+        }).catch( res =>{   
+          swal.fire(
+            'Failed!',
+            `Something Went Wrong !`,
+            'error'
+          )
+        })
+      }
+    })
+
   }
 
 }

@@ -63,7 +63,7 @@ export class ManageInvestigationComponent implements OnInit {
   }
 
   onSubmit(userForm:NgForm ){
-
+    console.log(userForm.value)
   this.setSelectedGpx(userForm).then(
     res=>{
       if(userForm.value.$key == null)
@@ -81,19 +81,20 @@ export class ManageInvestigationComponent implements OnInit {
         //  this.toastr.success('Submitted Successfully','User Register');
         this.resetForm(userForm);
        
-      }
-      else
-      {
+      }else{
         this.manageInvestigationService.updateInvestigation(userForm.value).then(
-          res=>{
-              // this.toastr.success('Updated Successfully','User Register');
-          }
-        )
-        
+          res=>{  
+              swal.fire(
+                'Updated!',
+                'Your data updated successfully',
+                'success'
+              )
+              this.ngxSmartModalService.getModal('viewM').close();
+         } ) 
       }
- 
     }
-  )    
+  )
+  
   }
 
 

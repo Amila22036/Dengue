@@ -91,6 +91,6 @@
   </div>
 </div>
 
-<ngx-smart-modal #viewM identifier="viewM" [dismissable]=false>
+<ngx-smart-modal #viewM identifier="viewM" [dismissable]=false (onClose)="getAndSetInvestigations()">
     <manage_investigation></manage_investigation>
   </ngx-smart-modal>
