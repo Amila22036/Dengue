@@ -24,18 +24,27 @@
 
 .bdg-todo{
     background-color: #20a8d8;
+    box-shadow: 2px 3px 20px 0px #a0a0a0;
 }
 
 .bdg-inprograss{
     background-color:#ffc107;
+    box-shadow: 2px 3px 20px 0px #a0a0a0;
 }
 
 .bdg-done{
     background-color:#4dbd74;
+    box-shadow: 2px 3px 20px 0px #a0a0a0;
 }
 
 .bdg-reject{
     background-color:#a4a6a9;
+    box-shadow: 2px 3px 20px 0px #a0a0a0;
+}
+
+.bdg-onHold{
+    background-color:#c8ced3;
+    box-shadow: 2px 3px 20px 0px #a0a0a0;
 }
 
 .sub-head{
@@ -49,4 +58,8 @@
 
 .mgin-areas{
     margin-top:6%;
+}
+
+.c-s{
+    box-shadow: 0px 4px 20px 0px #757575;
 }

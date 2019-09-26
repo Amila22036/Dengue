@@ -58,6 +58,7 @@
           </select>
         <!-- <input class="form-control" name="PhoneNumber" #PhoneNumber="ngModel" [(ngModel)]="manageInvestigationService.selectedUser.PhoneNumber"  pattern="^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$" required> -->
     </div> 
+
   </div>
   <div class="col-6">
       <div class="form-group">
@@ -78,6 +79,15 @@
         <textarea class="form-control" name="description" #description="ngModel" [(ngModel)]="manageInvestigationService.selectedUser.description"  rows="3"></textarea>
         <!-- <input class="form-control" name="PhoneNumber" #PhoneNumber="ngModel" [(ngModel)]="manageInvestigationService.selectedUser.PhoneNumber"  pattern="^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$" required> -->
     </div> 
+    <div class="form-group">
+        <button class="btn btn-default" type="button" (click)="Map()"><ng-container *ngIf="mapService.isMapShowOnAreaInv == false">Destination Mark</ng-container><ng-container *ngIf="mapService.isMapShowOnArea == true"></ng-container></button>
+        <ng-container *ngIf="mapService.isMapShowOnAreaInv == true">
+            <div id="map"></div>
+            <!-- <div class='pointer'><< Click search button</div> -->
+            <!-- <a href="#" download="MyTracks.gpx" id="exportGPX">Export to file</a> -->
+        </ng-container>
+    </div>
+
     <div class="form-group">
       <button class="btn btn-default" type="submit" *ngIf="manageInvestigationService.selectedUser.$key == null" [disabled]="!userForm.valid">Submit</button>
       <button class="btn btn-default" type="submit" *ngIf="manageInvestigationService.selectedUser.$key != null" [disabled]="!userForm.valid">Update</button>

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild  } from '@angular/core';
 import {UsersService} from '../shared/users.service';
 import { Phi } from '../shared/user.model';
 import { element } from 'protractor';
 // import {ToastrService} from 'ngx-toastr';
 import { Subject } from 'rxjs'
 import swal from 'sweetalert2';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'phis-list',
@@ -13,28 +14,47 @@ import swal from 'sweetalert2';
 
 })
 export class PhisListComponent implements OnInit {
-  dtTrigger: Subject<any> = new Subject();
+
 
     phiList : Phi[];
     p: number = 1;
     term='';
-    dtOptions: DataTables.Settings = {};
+    dtOptions: any = {};
+    dtTrigger: Subject<any> = new Subject();
+    @ViewChild(DataTableDirective)
+    dtElement: DataTableDirective;
+
+
+ 
   constructor(public userService: UsersService) { }
 
   ngOnInit() {
     $.fn.dataTable.ext.errMode = 'throw';
-    var x= this.userService.getData();
-    x.snapshotChanges().subscribe(item =>{
-      this.phiList=[];
-      item.forEach(element =>{
-        var y=element.payload.toJSON();
-        y["$key"] =element.key;
-        this.phiList.push(y as  Phi);
+
+
+  }
+  
+  ngAfterViewInit(){
+    this.rerender();
+  }
+
+  getPhiList(){
+    return new Promise(resolve =>{
+      var x= this.userService.getData();
+      x.snapshotChanges().subscribe(item =>{
+        this.phiList=[];
+        item.forEach(element =>{
+          var y=element.payload.toJSON();
+          y["$key"] =element.key;
+          this.phiList.push(y as  Phi);
+        })
+        // this.dtTrigger.next()
+        resolve();
       })
-      this.dtTrigger.next()
     })
 
   }
+
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
@@ -57,6 +77,16 @@ export class PhisListComponent implements OnInit {
       console.log(phi);
   }
 
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first
+      dtInstance.destroy();
+      this.getPhiList().then(res =>{
+              // Call the dtTrigger to rerender again
+              this.dtTrigger.next();
+      })
+    });
+  }
 
   deletePHI(key){
     swal.fire({

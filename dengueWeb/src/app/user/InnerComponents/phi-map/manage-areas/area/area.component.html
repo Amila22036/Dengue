@@ -21,7 +21,8 @@
     <button class="btn btn-default" type="button" (click)="Map()"><ng-container *ngIf="mapService.isMapShowOnArea == false">Draw map</ng-container><ng-container *ngIf="mapService.isMapShowOnArea == true"></ng-container></button>
    <ng-container *ngIf="mapService.isMapShowOnArea == true">
     <div  id="map"></div>
-    <a href="#" download="MyTracks.gpx" id="exportGPX">Export to file</a>
+    <div class='pointer'><< Click search button</div>
+    <!-- <a href="#" download="MyTracks.gpx" id="exportGPX">Export to file</a> -->
    </ng-container>
     <div class="form-group">
       <button class="btn btn-default" type="submit" [disabled]="!areaForm.valid">Submit</button>

@@ -30,9 +30,14 @@ export class MapService {
   // map:any;
   customLayer:any;
   currentSite:any;
+  currentSiteId
   gpxFile : any;
+  isMarkerDrown: boolean = false;
   isPolygonDrown:boolean = false;
   isMapShowOnArea : boolean = false;
+  isMapShowOnAreaInv : boolean = false;
+  markerLong = 0;
+  markerLat = 0;
   map2 :any;
   constructor(public storage:AngularFireStorage) { }
 
@@ -84,8 +89,9 @@ export class MapService {
       opacity: 1,
       fillOpacity: 0.8
   };
-
-  var marker = L.marker([7.323407, 80.643512], { title: "Test PHI" }).addTo(map);
+  console.log("current latitude ",this.currentSite.latitude)
+  this.currentSiteId = this.currentSite.$key;
+  var marker = L.marker([this.currentSite.longitude,this.currentSite.latitude], { title: "Test PHI" }).addTo(map);
   })
   .catch( err=>{
     console.log("Error ", err)
@@ -119,19 +125,33 @@ export class MapService {
       var latlon = e.layer._latlngs;
       var gpsObj  = {};
       var gpsFinal = [];
-      console.log("dragg ", e);
+      console.log("dragg ", e ,"lat long ",latlon);
+      if(latlon == undefined)
+      {
+        latlon = e.layer._latlng;
+        this.markerLong = latlon.lat
+        this.markerLat = latlon.lng;
+        gpsObj['latitude'] = latlon.lat;
+        gpsObj['longitude'] = latlon.lng;
+        gpsFinal.push(gpsObj);
+        gpsObj = {}
+      }else
+      {
       latlon.forEach(element => {
         gpsObj['latitude'] = element.lat;
         gpsObj['longitude'] = element.lng;
         gpsFinal.push(gpsObj);
         gpsObj = {}
-      }
-      
-      );
+      });
+    }
       console.log("lat longg ",gpsFinal)
    
       if (type === 'marker') {
         // Do marker specific actions
+        const gpx = createGpx(gpsFinal);
+        this.gpxFile = createGpx(gpsFinal);
+        console.log("gpx ", gpx)
+        this.isMarkerDrown = true;
       }else if (type === 'polyline')
       {
        const gpx = createGpx(gpsFinal);
@@ -140,8 +160,21 @@ export class MapService {
        this.isPolygonDrown = true;
       // saveAs(blob,'Gpx_Map.gpx');
       // this.isMapShowOnArea = false;
-      console.log("gpx ", gpx)
+  
       }
+
+    //   var searchControl = new L.esri.Controls.Geosearch().addTo(this.map2);
+
+    //   var results = new L.LayerGroup().addTo(this.map2);
+    
+    //   searchControl.on('results', function(data){
+    //     results.clearLayers();
+    //     for (var i = data.results.length - 1; i >= 0; i--) {
+    //       results.addLayer(L.marker(data.results[i].latlng));
+    //     }
+    //   });
+    
+    // setTimeout(function(){$('.pointer').fadeOut('slow');},3400);
 
       this.map2.addLayer(layer)
 

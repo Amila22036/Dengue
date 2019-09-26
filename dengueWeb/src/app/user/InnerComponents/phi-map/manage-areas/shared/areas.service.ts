@@ -37,7 +37,11 @@ export class AreasService {
           this.isgpxUploaded = true;
         }
       )
+    }else if(this.mapService.isMarkerDrown == true)
+    {
+      
     }
+
     this.getData();
     resolve();
     })

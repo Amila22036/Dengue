@@ -7,6 +7,7 @@ import { NgxSmartModalService } from 'ngx-smart-modal';
 import swal from 'sweetalert2';
 import { AreasService } from '../phi-map/manage-areas/shared/areas.service';
 import {Area} from '../phi-map/manage-areas/shared/area.model';
+import {MapService} from '../../../services/map/map.service';
 
 @Component({
   selector: 'app-kanban',
@@ -25,7 +26,8 @@ export class KanbanComponent implements OnInit {
   areaList : Area[];
   constructor(public manageInvestigationService:ManageInvestigationService,
     public ngxSmartModalService:NgxSmartModalService,
-    public areasService:AreasService
+    public areasService:AreasService,
+    public mapService: MapService
    ) { 
     this.InvestigationStatus = InvestigationStatus;
   }
@@ -147,11 +149,11 @@ this.getAreas();
   
   onDrop(event:DndDropEvent,status) {
 
-    console.log("on drop",event.data);
-    console.log("Status ",status);
     let investigationData = event.data;
     investigationData.status = status;
-    console.log("Inves data ",investigationData.area )
+    this.mapService.markerLat = investigationData.latitude;
+    this.mapService.markerLong = investigationData.longitude;
+    this.mapService.isMarkerDrown = true;
     this.setSelectedGpx(investigationData.area).then(res =>{
     this.manageInvestigationService.updateInvestigation(investigationData).then(
       res=>{
@@ -164,12 +166,10 @@ this.getAreas();
       }
     )
   })
-
-    console.log("dropped", JSON.stringify(event, null, 2));
   }
 
   view(investigation){
-    console.log("double clicked",investigation);
+    this.mapService.isMapShowOnAreaInv = false
     this.manageInvestigationService.selectedUser = investigation;
     this.ngxSmartModalService.getModal('viewM').open();
   }

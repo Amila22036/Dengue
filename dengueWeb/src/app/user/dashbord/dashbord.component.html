@@ -1,7 +1,7 @@
 <div class="container">
 <div class="row ptn">
     <div class="col-sm-6 col-lg-4">
-      <div class="card text-white bg-info ">
+      <div class="card text-white bg-info c-s ">
         <div class="card-body pb-0"> 
           <div class="txt-value">{{NoOfAreas}}</div>
           <div class="txt">No Of Saved Areas</div>
@@ -11,7 +11,7 @@
     </div>
     <!-- /.col-->
     <div class="col-sm-6 col-lg-4">
-      <div class="card text-white bg-info ">
+      <div class="card text-white bg-info c-s">
         <div class="card-body pb-0">
   
           <div class="txt-value">{{NoOfInvestigations}}</div>
@@ -22,7 +22,7 @@
     </div>
     <!-- /.col-->
     <div class="col-sm-6 col-lg-4">
-      <div class="card text-white bg-warning ">
+      <div class="card text-white bg-warning c-s">
         <div class="card-body pb-0">
   
           <div class="txt-value">10</div>
@@ -48,15 +48,17 @@
                     Remove filter
             </button>
 
-            <div class="card" style="margin-top: 2%;width: 100%;">
+            <div class="card c-s" style="margin-top: 2%;width: 100%;">
                 <div class="card-body">
                   <h5 class="card-title">Current Investigations</h5>
+                  <div *ngIf="filteredInvestigationList.length == 0">No Investigations for {{area}}</div>
                   <div *ngFor="let investigation of filteredInvestigationList" >
                       <div [ngClass]="{
                         'bdg-todo':investigation.status === InvestigationStatus.TODO,
                         'bdg-inprograss':investigation.status === InvestigationStatus.IN_PROGRASS,
                         'bdg-done':investigation.status === InvestigationStatus.DONE,
-                        'bdg-reject':investigation.status === InvestigationStatus.REJECTED
+                        'bdg-reject':investigation.status === InvestigationStatus.REJECTED,
+                        'bdg-onHold':investigation.status == InvestigationStatus.ON_HOLD
                       }">
                           <h6>{{investigation.name}}</h6>
                           <!-- <img [src]="animal.image"> -->

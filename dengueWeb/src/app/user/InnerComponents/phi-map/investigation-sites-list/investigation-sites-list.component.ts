@@ -23,26 +23,37 @@ export class InvestigationSitesListComponent implements OnInit {
   firstDate: string;
   investigationList : Investigation [];
   InvestigationStatus;
+  currentSiteId = '';
 
   constructor(private _investigationService:InvestigationsService ,
      public mainUIService:MainUIService ,public mapService: MapService,
      public ngxSmartModalService:NgxSmartModalService,
      public manageInvestigationService:ManageInvestigationService) { 
        this.InvestigationStatus = InvestigationStatus;
+       if(this.mapService.currentSite != undefined){
+        this.currentSiteId = this.mapService.currentSite.$key
+       }
+       
      }
 
   ngOnInit() {
     this.investigations = this._investigationService.getInvestigations();
     var x= this.manageInvestigationService.getData();
     x.snapshotChanges().subscribe(item =>{
-      console.log("inves item ",JSON.stringify(item))
       this.investigationList=[];
       item.forEach(element =>{
         var y=element.payload.toJSON();
         y["$key"] = element.key;
         this.investigationList.push(y as Investigation);
       })
-      console.log("inves ", JSON.stringify(this.investigationList))
+
+      this.investigationList.forEach(investigation =>{
+        if(investigation.$key == this.currentSiteId)
+        {
+          this.mapService.currentSite = investigation;
+        }
+      })
+
     })
 
     this.totalInvestigations = this._investigationService.getTotalInvestigations(this.investigations);
@@ -58,6 +69,7 @@ export class InvestigationSitesListComponent implements OnInit {
   }
 
   newInvestigation(){
+    this.mapService.isMapShowOnAreaInv = false;
     this.ngxSmartModalService.getModal('myModal').open();
     //old way
    // this.mainUIService.fullContainer = FullPanelComponentEnum.NEW_INVESTIGATION;

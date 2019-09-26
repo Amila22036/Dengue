@@ -11,6 +11,8 @@ export class Investigation {
     assigned_PHI: string;
     start_date: string;
     end_date: string;
-    status: string;
+    status: number;
     description: string;
+    longitude: number;
+    latitude: number;
 }

@@ -9,6 +9,7 @@ import { Area} from '../../manage-areas/shared/area.model';
 import { Phi } from '../../manage-users/shared/user.model';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import swal from 'sweetalert2';
+import { MapService } from '../../../../../services/map/map.service';
 
 @Component({
   selector: 'manage_investigation',
@@ -22,13 +23,15 @@ export class ManageInvestigationComponent implements OnInit {
   private InvestigationStatus;
   constructor(public manageInvestigationService : ManageInvestigationService,
     public mainUIService:MainUIService, public areasService:AreasService, public userService:UsersService,
-    public ngxSmartModalService:NgxSmartModalService ) { 
+    public ngxSmartModalService:NgxSmartModalService,public mapService:MapService ) { 
       this.manageInvestigationService.getData();
 
       this.InvestigationStatus = InvestigationStatus;
+     
     }
   ngOnInit() {
     var x= this.areasService.getData();
+   
     x.snapshotChanges().subscribe(item =>{
       this.areaList=[];
       item.forEach(element =>{
@@ -62,6 +65,18 @@ export class ManageInvestigationComponent implements OnInit {
     })
   }
 
+  Map(){
+    // this.isMapShow = !this.isMapShow;
+    this.mapService.isMapShowOnAreaInv = !this.mapService.isMapShowOnAreaInv;
+    if(this.mapService.isMapShowOnAreaInv == true)
+    {
+      setTimeout(() => {
+        this.mapService.drawRoute();
+      }, 1000);
+     
+    }
+  }
+
   onSubmit(userForm:NgForm ){
     console.log(userForm.value)
   this.setSelectedGpx(userForm).then(
@@ -77,7 +92,13 @@ export class ManageInvestigationComponent implements OnInit {
             )
             this.ngxSmartModalService.getModal('myModal').close();
            }         
-         )
+         ).catch(err=>{
+          swal.fire(
+            'Error!',
+            'Add a Destination point',
+            'error'
+          )
+         })
         //  this.toastr.success('Submitted Successfully','User Register');
         this.resetForm(userForm);
        
@@ -114,8 +135,10 @@ export class ManageInvestigationComponent implements OnInit {
         assigned_PHI: '',
         start_date: '',
         end_date: '',
-        status: '',
-        description:''
+        status: -11,
+        description:'',
+        longitude: 0,
+        latitude: 0
       }
   }
 
