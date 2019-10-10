@@ -1,5 +1,5 @@
 <h6 class="text-center">PHI details</h6>
-<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="table table-sm table-hover"  id="test">
+<table datatable [dtTrigger]="dtTrigger"  class="table table-sm table-hover"  id="test">
   <thead>
   <tr>
     <th>First Name</th>
@@ -10,7 +10,7 @@
   </tr>
 </thead>
 <tbody>
-    <tr *ngFor="let phi of phiList " (click)="onEdit(phi)">
+    <tr *ngFor="let phi of userService.phiFinalList " (click)="onEdit(phi)">
        
         <td>{{phi.FirstName}}</td>
         <td>{{phi.LastName}}</td>

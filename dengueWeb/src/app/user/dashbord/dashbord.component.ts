@@ -26,7 +26,7 @@ export class DashbordComponent implements OnInit {
   //active filter rules
   filters = {};
   InvestigationStatus;
-  @ViewChild('chart') el: ElementRef;
+  @ViewChild('chart',{static:true}) el: ElementRef;
 
   constructor(public areasService:AreasService , public manageInvestigationService:ManageInvestigationService
     , private firebase:AngularFireDatabase) { 

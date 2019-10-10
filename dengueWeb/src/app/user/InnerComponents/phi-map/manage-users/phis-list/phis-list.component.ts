@@ -19,9 +19,9 @@ export class PhisListComponent implements OnInit {
     phiList : Phi[];
     p: number = 1;
     term='';
-    dtOptions: any = {};
+    // dtOptions: any = {};
     dtTrigger: Subject<any> = new Subject();
-    @ViewChild(DataTableDirective)
+    @ViewChild(DataTableDirective,{static: false})
     dtElement: DataTableDirective;
 
 
@@ -30,25 +30,27 @@ export class PhisListComponent implements OnInit {
 
   ngOnInit() {
     $.fn.dataTable.ext.errMode = 'throw';
-
+    this.getInitPhiList();
 
   }
   
-  ngAfterViewInit(){
-    this.rerender();
+
+  getInitPhiList(){
+    this.getPhiList().then(res=>{
+      this.dtTrigger.next();
+    })
   }
 
   getPhiList(){
     return new Promise(resolve =>{
       var x= this.userService.getData();
-      x.snapshotChanges().subscribe(item =>{
-        this.phiList=[];
+      this.userService.phiFinalList=[];
+      x.snapshotChanges().subscribe(item =>{     
         item.forEach(element =>{
           var y=element.payload.toJSON();
           y["$key"] =element.key;
-          this.phiList.push(y as  Phi);
+          this.userService.phiFinalList.push(y as  Phi);
         })
-        // this.dtTrigger.next()
         resolve();
       })
     })
@@ -60,17 +62,17 @@ export class PhisListComponent implements OnInit {
     this.dtTrigger.unsubscribe();
   }
 
-  reloadTable(){
-    $.fn.dataTable.ext.errMode = 'throw';
-    setTimeout(() => {
-      var table = $('#test').DataTable();    
-      table.clear();
-      this.phiList.forEach(phi =>{
-        table.row.add(phi);
-      })
-    }, 1000);
+  // reloadTable(){
+  //   $.fn.dataTable.ext.errMode = 'throw';
+  //   setTimeout(() => {
+  //     var table = $('#test').DataTable();    
+  //     table.clear();
+  //     this.phiList.forEach(phi =>{
+  //       table.row.add(phi);
+  //     })
+  //   }, 1000);
  
-  }
+  // }
 
   onEdit(phi: Phi){
     this.userService.selectedUser= Object.assign({},phi);
@@ -83,7 +85,7 @@ export class PhisListComponent implements OnInit {
       dtInstance.destroy();
       this.getPhiList().then(res =>{
               // Call the dtTrigger to rerender again
-              this.dtTrigger.next();
+              this.userService.dtTrigger.next();
       })
     });
   }
@@ -105,7 +107,7 @@ export class PhisListComponent implements OnInit {
               'Your data has been deleted.',
               'success'
             )    
-            this.dtTrigger.next();     
+            this.rerender();    
         }).catch( res =>{   
           swal.fire(
             'Failed!',

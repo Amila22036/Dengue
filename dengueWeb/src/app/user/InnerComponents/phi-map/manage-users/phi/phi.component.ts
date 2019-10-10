@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild} from '@angular/core';
 import {UsersService} from '../shared/users.service';
 import {NgForm,FormBuilder,FormGroup,Validators} from '@angular/forms';
 import swal from 'sweetalert2';
+import { Phi } from '../shared/user.model';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'phi',
@@ -10,13 +12,42 @@ import swal from 'sweetalert2';
  
 })
 export class PhiComponent implements OnInit {
-
+  // phiList : Phi[];
+  @ViewChild(DataTableDirective,{static: false})
+  dtElement: DataTableDirective;
   constructor(public userService : UsersService) { }
 
   ngOnInit() {
     this.userService.getData();
     this.resetForm();
     
+  }
+
+  getPhiList(){
+    return new Promise(resolve =>{
+      var x= this.userService.getData();
+      this.userService.phiFinalList=[];
+      x.snapshotChanges().subscribe(item =>{     
+        item.forEach(element =>{
+          var y=element.payload.toJSON();
+          y["$key"] =element.key;
+          this.userService.phiFinalList.push(y as  Phi);
+        })
+        resolve();
+      })
+    })
+
+  }
+
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first
+      dtInstance.destroy();
+      this.getPhiList().then(res =>{
+              // Call the dtTrigger to rerender again
+              this.userService.dtTrigger.next();
+      })
+    });
   }
 
   onSubmit(userForm:NgForm){
