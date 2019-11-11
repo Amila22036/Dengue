@@ -12,8 +12,18 @@
     <div id="run-info">
         <h2 class="heading">Investigation Route</h2>
         <hr/>
-        <div class="data-heading">Route Name:</div>
-        <p class="data-entry"> activityName </p>
+        
+        <div class="data-heading"><span class="bold">Route Name:</span> {{mapService.currentSite.name}}</div>
+        <div class="data-heading"><span class="bold">Route:</span> {{mapService.currentSite.area}}</div>
+        <p class="data-heading"><span class="bold">Description:</span> {{mapService.currentSite.description}} </p>
+        <p class="data-heading"><span class="bold">Assigned Phi:</span>{{mapService.currentSite.assigned_PHI}}</p>
+        <p class="data-heading"><span class="bold">start date :</span>{{mapService.currentSite.start_date.day}}/{{mapService.currentSite.start_date.month}}/{{mapService.currentSite.start_date.year}}</p>
+        <p class="data-heading"><span class="bold">start date :</span> {{mapService.currentSite.end_date.day}}/{{mapService.currentSite.end_date.month}}/{{mapService.currentSite.end_date.year}}</p>
+        <p class="data-heading">  <span  class="badge badge-primary" *ngIf="mapService.currentSite.status == InvestigationStatus.TODO">To do</span>
+          <span  class="badge badge-warning" *ngIf="mapService.currentSite.status == InvestigationStatus.IN_PROGRASS">In Prograss</span>
+          <span  class="badge badge-success" *ngIf="mapService.currentSite.status == InvestigationStatus.DONE">Done</span>
+          <span  class="badge badge-dark" *ngIf="mapService.currentSite.status == InvestigationStatus.REJECTED">Rejected</span>
+          <span  class="badge badge-secondary" *ngIf="mapService.currentSite.status == InvestigationStatus.ON_HOLD">On hold</span> </p>
         <!-- <hr/> -->
 <!--   
         <div class="data-heading">Date:</div>

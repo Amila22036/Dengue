@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { SAVED_ACTIVITIES } from '../../shared/investigation-sites';
+import { AngularFireDatabase,AngularFireList} from 'angularfire2/database';
+import { Prediction } from '../map/heat-map.model';
 import 'leaflet';
 import 'leaflet-draw';
 //import 'webgl-heatmap';
@@ -30,6 +32,7 @@ const defaultZoom: number = 8
   providedIn: 'root'
 })
 export class HeatMapService {
+  predictionList: AngularFireList<any>;
   customLayer:any;
   RiskAreas:any;
   heatmapLayer:any;
@@ -38,14 +41,43 @@ export class HeatMapService {
     max: 8,
     data: []
   };
+  predictionFinalList = [];
 
-  constructor() { }
+  constructor(private firebase:AngularFireDatabase) { }
 
-  getRiskAreas(){
+  getData(){
+    this.predictionList = this.firebase.list('prediction');
+    return this.predictionList;
+  }
+
+  getPredictionList(){
+    return new Promise(resolve =>{
+      var x= this.getData();
+      this.predictionFinalList=[];
+      x.snapshotChanges().subscribe(item =>{     
+        item.forEach(element =>{
+          var y=element.payload.toJSON();
+          y["$key"] =element.key;
+          this.predictionFinalList.push(y as  Prediction );
+        })
+        resolve();
+      })
+    })
+
+  }
+
+  getRiskAreas(){  
     this.RiskAreas = {area:[ {id: 1,week:'1/9/2019',areas :[{lat: 6.927079, lng:79.861244, count: 3},{lat: 6.937079, lng: 80.861244, count: 1}]},
                     {id: 2,week:'8/9/2019',areas :[{lat: 6.927079, lng:79.861244, count: 3},{lat:6.0535 , lng:80.2210, count: 5},{lat:6.1385 , lng:80.1908, count: 4},{lat:6.1085 , lng:80.2126, count: 4},{lat: 6.937079, lng: 80.861244, count: 2}]},
                     {id: 3,week:'15/9/2019',areas :[{lat: 6.927079, lng:79.861244, count: 3},{lat:6.5854, lng:79.9607, count: 6},{lat: 6.937079, lng: 80.861244, count: 3}]}]}
-  }
+    this.getPredictionList().then(res=>{
+          let array = [];
+          let week = '';
+          array = Object.values(this.predictionFinalList[0].area.areas);
+          week = this.predictionFinalList[0].area.week;
+          this.RiskAreas = {area:[ {id: 1,week: week ,areas : array}]}
+      })
+    }
 
   setTestData(entry){
     return new Promise(resolve =>{
@@ -55,9 +87,8 @@ export class HeatMapService {
           entry.areas.forEach(ltlng => {
             this.testData.data.push(ltlng);
           });
-          // this.testData.data.push(entry.areas);
           console.log(" test data ", this.testData)
-          // this.plotInvestigationRoute2();
+          
           resolve();
         }
       });

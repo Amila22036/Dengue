@@ -37,7 +37,8 @@ export class PhisListComponent implements OnInit {
 
   getInitPhiList(){
     this.getPhiList().then(res=>{
-      this.dtTrigger.next();
+      // this.dtTrigger.next();
+      this.userService.dtTrigger.next();
     })
   }
 
@@ -91,6 +92,8 @@ export class PhisListComponent implements OnInit {
   }
 
   deletePHI(key){
+    this.userService.phiFinalList = [];
+    this.userService.dtTrigger.next();
     swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",

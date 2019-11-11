@@ -13,11 +13,15 @@
 
 .data-heading{
   font-family: 'Fjalla One', sans-serif;
-  font-size: 1.6em;
+  font-size: 1em;
   color: #333;
 }
 
 .data-entry{
   padding: 8px 0px 2px 16px;
-  font-size: 1.5em;
+  font-size: 1em;
+}
+
+.bold{
+  font-weight: bold;
 }

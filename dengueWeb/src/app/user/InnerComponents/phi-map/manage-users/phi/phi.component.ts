@@ -16,7 +16,7 @@ export class PhiComponent implements OnInit {
   @ViewChild(DataTableDirective,{static: false})
   dtElement: DataTableDirective;
   constructor(public userService : UsersService) { }
-
+  // dtTrigger: Subject<any> = new Subject();
   ngOnInit() {
     this.userService.getData();
     this.resetForm();
@@ -39,27 +39,19 @@ export class PhiComponent implements OnInit {
 
   }
 
-  rerender(): void {
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-      // Destroy the table first
-      dtInstance.destroy();
-      this.getPhiList().then(res =>{
-              // Call the dtTrigger to rerender again
-              this.userService.dtTrigger.next();
-      })
-    });
-  }
 
   onSubmit(userForm:NgForm){
+    this.userService.phiFinalList = [];
+    this.userService.dtTrigger.next();
     if(userForm.value.$key == null)
-    {
+    {     
        this.userService.insertUser(userForm.value).then(
          res=>{
           swal.fire(
             'Saved !',
             `Your data saved successfully`,
             'success'
-          )
+          )        
           this.userService.dtTrigger.next();
          }
        ).catch(err =>{
@@ -69,6 +61,7 @@ export class PhiComponent implements OnInit {
           'error'
         )
        })
+       this.userService.dtTrigger.next();
       //  this.toastr.success('Submitted Successfully','User Register');
     }
     else
@@ -88,11 +81,24 @@ export class PhiComponent implements OnInit {
           `Something Went Wrong !`,
           'error'
         )
+        // Call the dtTrigger to rerender again
+        this.userService.dtTrigger.next();
       })
       // this.toastr.success('Updated Successfully','User Register');
     }
       this.resetForm(userForm);
       
+  }
+
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first
+      dtInstance.destroy();
+      this.getPhiList().then(res =>{
+              // Call the dtTrigger to rerender again
+              this.userService.dtTrigger.next();
+      })
+    });
   }
 
   resetForm(userForm?:NgForm){

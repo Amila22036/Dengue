@@ -1,9 +1,10 @@
 import { Component, OnInit, AfterViewInit} from '@angular/core';
 import { MapService } from '../../../../services/map/map.service';
-import { FullPanelComponentEnum } from '../../../../shared/enums/mainUI.components.enums';
+import { FullPanelComponentEnum,InvestigationStatus } from '../../../../shared/enums/mainUI.components.enums';
 import { MainUIService } from '../../../../services/main-ui.service';
 import { IinvestigationSitesModel } from '../../../../shared/investigation-sites.model';
 import { Investigation } from '../manage-investigations/shared/manage_investigation.model';
+import { AngularFireDatabase,AngularFireList} from 'angularfire2/database';
 import { ManageInvestigationService } from '../manage-investigations/shared/manage_investigation.service';
 
 @Component({
@@ -20,7 +21,12 @@ export class InvestigationRoutesComponent implements OnInit {
   InvestigationStatus;
   currentSiteId = '';
   constructor(public mapService: MapService, public mainUIService:MainUIService,
-    public manageInvestigationService:ManageInvestigationService) { }
+    public manageInvestigationService:ManageInvestigationService,public firebase:AngularFireDatabase) { 
+      this.InvestigationStatus = InvestigationStatus;
+      if(this.mapService.currentSite != undefined){
+        this.currentSiteId = this.mapService.currentSite.$key
+       }
+    }
 
   ngOnInit() {
     var x= this.manageInvestigationService.getData();
@@ -30,8 +36,15 @@ export class InvestigationRoutesComponent implements OnInit {
         var y=element.payload.toJSON();
         y["$key"] = element.key;
         this.investigationList.push(y as Investigation);
-      })
 
+        this.investigationList.forEach(investigation =>{
+          if(investigation.$key == this.currentSiteId)
+          {
+            this.mapService.currentSite = investigation;
+          }
+        })
+      
+      })
     })
   }
 

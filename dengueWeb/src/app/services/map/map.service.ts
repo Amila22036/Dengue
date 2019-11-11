@@ -12,6 +12,7 @@ import { saveAs } from 'file-saver';
 import '../../../assets/js/L.Realtime';
 import * as firebase from 'firebase/app';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
+import { AngularFireDatabase,AngularFireList} from 'angularfire2/database';
 // import 'webgl-heatmap';
 
 var mapAccesstoken = environment.MAPBOX_API_KEY;
@@ -39,7 +40,10 @@ export class MapService {
   markerLong = 0;
   markerLat = 0;
   map2 :any;
-  constructor(public storage:AngularFireStorage) { }
+  stepcount = -1;
+  constructor(public storage:AngularFireStorage,public firebase:AngularFireDatabase) { 
+
+  }
 
   getInvestigation(id: number){
     return SAVED_ACTIVITIES.slice(0).find(x => x.id == id )
@@ -47,7 +51,7 @@ export class MapService {
 
   plotInvestigationRoute(id: number){
     // this.initializeMap();
-    debugger
+    this.stepcount = -1;
     let downloadUrlToken = '';
     let storage = firebase.storage();
    let storageRef =  this.storage.ref(`test/${this.currentSite.area_gpx_name}`);
@@ -89,9 +93,18 @@ export class MapService {
       opacity: 1,
       fillOpacity: 0.8
   };
-  console.log("current latitude ",this.currentSite.latitude)
+  console.log("current latitude ",this.currentSite)
   this.currentSiteId = this.currentSite.$key;
-  var marker = L.marker([this.currentSite.longitude,this.currentSite.latitude], { title: "Test PHI" }).addTo(map);
+  var marker = L.marker([this.currentSite.longitude,this.currentSite.latitude], { title: `${this.currentSite.assigned_PHI} step ${this.stepcount}` }).addTo(map);
+  var ref = this.firebase.database.ref("Investigation")  
+  const _this = this;      
+  this.firebase.database.ref().on('value', function(snapshot) {
+    _this.stepcount++;
+    L.marker([_this.currentSite.longitude,_this.currentSite.latitude], { title: `${_this.currentSite.assigned_PHI} step ${_this.stepcount}`  }).addTo(map);
+  
+      // Do whatever
+  });
+
   })
   .catch( err=>{
     console.log("Error ", err)

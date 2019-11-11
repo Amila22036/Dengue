@@ -12,6 +12,7 @@ export class UsersService {
   dtTrigger: Subject<any> = new Subject();
   phiFinalList =[];
 
+  dtElement: DataTableDirective;
 
   constructor(private firebase:AngularFireDatabase) { }
 
@@ -77,5 +78,22 @@ export class UsersService {
     
    }
 
+
+
+  getPhiList(){
+    return new Promise(resolve =>{
+      var x= this.getData();
+      this.phiFinalList=[];
+      x.snapshotChanges().subscribe(item =>{     
+        item.forEach(element =>{
+          var y=element.payload.toJSON();
+          y["$key"] =element.key;
+          this.phiFinalList.push(y as  Phi);
+        })
+        resolve();
+      })
+    })
+
+  }
 
 }

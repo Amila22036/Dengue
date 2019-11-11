@@ -55,6 +55,7 @@ import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { DashbordComponent } from './user/dashbord/dashbord.component';
 import { MglTimelineModule } from 'angular-mgl-timeline';
 import { DataTablesModule } from 'angular-datatables';
+import { HttpClientModule } from '@angular/common/http'; 
 
 @NgModule({
   declarations: [
@@ -102,7 +103,8 @@ import { DataTablesModule } from 'angular-datatables';
     NgDatepickerModule,
     NgxSmartModalModule.forRoot(),
     MglTimelineModule,
-    DataTablesModule
+    DataTablesModule,
+    HttpClientModule
   ],
   providers: [AuthService,MapService , UserService,UserResolver,AuthGuard,UsersService,ProjectService,
     ManageInvestigationService, AngularFirestore , AngularFireStorage, AreasService],
